@@ -18,7 +18,10 @@
 
 #include "layer_type.h"
 
+
+namespace ncnn {
 #include "layer/arm/convolution_1x1.h"
+}
 
 static int test_convolution(int w, int h, int c, int outch, int kernel, int dilation, int stride, int pad, int bias)
 {
