@@ -269,7 +269,7 @@ int main()
     ncnn::Mat bot = RandomMat(w, h, inch);
     ncnn::Mat top = RandomMat(w, h, outch);
     ncnn::Mat kernel = RandomMat(inch * outch, 1, 1);
-    ncnn::Mat bias = RandomMat(w, h, c);
+    ncnn::Mat bias = RandomMat(outch, 1, 1);
 
     conv1x1s1_sgemm_qpu(bot, top, kernel, bias, opt);
 
