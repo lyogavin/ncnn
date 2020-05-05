@@ -33,7 +33,7 @@
 
 namespace ncnn {
 
-void Mat::dump_info()
+void Mat::dump_info() const
 {
     fprintf(stdout, "Mat: w:%d h:%d c:%d elemsize:%d elempack:%d dims:%d cstep:%d\n", w, h, c, elemsize, elempack, dims, cstep);
 }
