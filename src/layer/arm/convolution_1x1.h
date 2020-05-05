@@ -16,6 +16,8 @@ static void conv1x1s1_sgemm_transform_kernel_neon(const Mat& _kernel, Mat& kerne
 {
     const float* kernel = _kernel;
 
+    _kernel.dump_info();
+
     // interleave
 #if __ARM_NEON && __aarch64__
     kernel_tm.create(4*8, inch/4 + inch%4, outch/8 + (outch%8)/4 + outch%4);
