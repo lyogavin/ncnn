@@ -33,9 +33,9 @@
 
 namespace ncnn {
 
-void Mat::dump_info() const
+void Mat::dump_info(const char * name) const
 {
-    fprintf(stdout, "Mat: w:%d h:%d c:%d elemsize:%d elempack:%d dims:%d cstep:%d\n", w, h, c, elemsize, elempack, dims, cstep);
+    fprintf(stdout, "Mat:%s w:%d h:%d c:%d elemsize:%d elempack:%d dims:%d cstep:%d\n", name, w, h, c, elemsize, elempack, dims, cstep);
 }
 
 void Mat::substract_mean_normalize(const float* mean_vals, const float* norm_vals)

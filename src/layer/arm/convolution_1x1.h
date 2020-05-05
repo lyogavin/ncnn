@@ -16,7 +16,7 @@ static void conv1x1s1_sgemm_transform_kernel_neon(const Mat& _kernel, Mat& kerne
 {
     const float* kernel = _kernel;
 
-    _kernel.dump_info();
+    _kernel.dump_info("kernel");
 
     // interleave
 #if __ARM_NEON && __aarch64__
@@ -124,7 +124,7 @@ static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Ma
 
     // interleave
     Mat tmp(8*4, inch/4+inch%4, size/8 + (size%8)/4 + size%4, 4u, opt.workspace_allocator);
-    tmp.dump_info();
+    tmp.dump_info("tmp_in_mat");
     {
         int nn_size = size >> 3;
         int remain_size_start = nn_size << 3;

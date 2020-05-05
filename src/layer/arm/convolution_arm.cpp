@@ -867,12 +867,9 @@ int Convolution_arm::forward(const Mat& bottom_blob, Mat& top_blob, const Option
                 conv1x1s1_sgemm_neon_total_time += end - start;
                 fprintf(stderr, "use conv1x1s1_sgemm_neon time:%f, total %f\n", end - start, conv1x1s1_sgemm_neon_total_time);
 
-                fprintf(stdout, "bottom_blob:\n");
-                bottom_blob_bordered.dump_info();
-                fprintf(stdout, "top_blob:\n");
-                top_blob.dump_info();
-                fprintf(stdout, "weight_1x1_sgemm_data:\n");
-                weight_1x1_sgemm_data.dump_info();
+                bottom_blob_bordered.dump_info("bottom_blob_bordered");
+                top_blob.dump_info("top_blob");
+                weight_1x1_sgemm_data.dump_info("weight_1x1_sgemm_data");
 
 
             }

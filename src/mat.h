@@ -145,7 +145,7 @@ public:
     const float& operator[](size_t i) const;
 
 
-    void dump_info() const;
+    void dump_info(const char* name) const;
 
 #if NCNN_PIXEL
     enum PixelType
