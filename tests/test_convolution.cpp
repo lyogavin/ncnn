@@ -15,6 +15,7 @@
 #include "testutil.h"
 
 #include "layer/convolution.h"
+#include "layer/arm/convolution_1x1.h"
 
 static int test_convolution(int w, int h, int c, int outch, int kernel, int dilation, int stride, int pad, int bias)
 {
@@ -245,5 +246,34 @@ int main()
 {
     SRAND(7767517);
 
-    return test_convolution_0() || test_convolution_1();
+    //return test_convolution_0() || test_convolution_1();
+
+    // to test: static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+
+    ncnn::Option opt;
+    opt.num_threads = 1;
+    opt.use_vulkan_compute = false;
+    opt.use_int8_inference = false;
+    opt.use_fp16_packed = false;
+    opt.use_fp16_storage = false;
+    opt.use_fp16_arithmetic = false;
+    opt.use_int8_storage = false;
+    opt.use_int8_arithmetic = false;
+
+    w = 10;
+    h = 10;
+    inch = 1280;
+    outch = 126;
+
+
+    ncnn::Mat bot = RandomMat(w, h, inch);
+    ncnn::Mat top = RandomMat(w, h, outch);
+    ncnn::Mat kernel = RandomMat(inch * outch, 1, 1);
+    ncnn::Mat bias = RandomMat(w, h, c);
+
+    conv1x1s1_sgemm_qpu(bot, top, kernel, bias, opt);
+
+
+
+    return 0;
 }
