@@ -122,6 +122,7 @@ static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Ma
 
     // interleave
     Mat tmp(8*4, inch/4+inch%4, size/8 + (size%8)/4 + size%4, 4u, opt.workspace_allocator);
+    tmp.dump_info();
     {
         int nn_size = size >> 3;
         int remain_size_start = nn_size << 3;

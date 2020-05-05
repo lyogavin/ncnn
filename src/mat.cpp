@@ -18,6 +18,7 @@
 #include <arm_neon.h>
 #endif // __ARM_NEON
 #include <math.h>
+#include <stdio.h>
 
 #include "cpu.h"
 
@@ -31,6 +32,11 @@
 #endif // NCNN_VULKAN
 
 namespace ncnn {
+
+void Mat::dump_info()
+{
+    fprintf(stdout, "Mat: w:%d h:%d c:%d elemsize:%d elempack:%d dims:%d cstep:%d\n", w, h, c, elemsize, elempack, dims, cstep);
+}
 
 void Mat::substract_mean_normalize(const float* mean_vals, const float* norm_vals)
 {
