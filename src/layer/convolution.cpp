@@ -14,6 +14,8 @@
 
 #include "convolution.h"
 #include <algorithm>
+
+#include <stdio.h>
 #include "layer_type.h"
 
 namespace ncnn {
@@ -49,6 +51,8 @@ int Convolution::load_param(const ParamDict& pd)
     activation_params = pd.get(10, Mat());
     impl_type = pd.get(17, 0);
 
+
+    fprintf(stderr, "dilation_w: %d, impl_type: %d", dilation_w, impl_type);
     return 0;
 }
 

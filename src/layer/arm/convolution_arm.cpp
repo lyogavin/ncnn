@@ -12,6 +12,7 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
+#include <stdio.h>
 #include "convolution_arm.h"
 #include "benchmark.h"
 
@@ -21,7 +22,9 @@
 #include <arm_neon.h>
 #include "neon_mathfun.h"
 #include "neon_activation.h"
+
 #endif // __ARM_NEON
+
 
 namespace ncnn {
 
@@ -347,6 +350,7 @@ int Convolution_arm::create_pipeline(const Option& opt)
 
             if (use_winograd3x3)
             {
+                fprintf(stderr, "use winograd3x3 num_input:%d num_output:%d\n", num_input, num_output);
 //                 conv3x3s1_winograd64_transform_kernel_neon(weight_data, weight_3x3_winograd64_data, num_input, num_output);
                 conv3x3s1_winograd64_transform_kernel_neon5(weight_data, weight_3x3_winograd64_data, num_input, num_output);
             }
@@ -360,6 +364,7 @@ int Convolution_arm::create_pipeline(const Option& opt)
 
             if (use_sgemm1x1)
             {
+                fprintf(stderr, "use conv1x1s1_sgemm_transform_kernel_neon num_input:%d num_output:%d\n", num_input, num_output);
                 conv1x1s1_sgemm_transform_kernel_neon(weight_data, weight_1x1_sgemm_data, num_input, num_output);
             }
         }
@@ -370,14 +375,17 @@ int Convolution_arm::create_pipeline(const Option& opt)
             {
                 case 1:
                     // winograd
+                    fprintf(stderr, "use conv3x3s1_winograd64_transform_kernel_neon5 num_input:%d num_output:%d\n", num_input, num_output);
                     conv3x3s1_winograd64_transform_kernel_neon5(weight_data, weight_3x3_winograd64_data, num_input, num_output);
                     break;
                 case 2:
                     // pointwise
+                    fprintf(stderr, "use conv1x1s1_sgemm_transform_kernel_neon num_input:%d num_output:%d\n", num_input, num_output);
                     conv1x1s1_sgemm_transform_kernel_neon(weight_data, weight_1x1_sgemm_data, num_input, num_output);
                     break;
                 case 3:
                     // im2col
+                    fprintf(stderr, "use conv_im2col_sgemm_transform_kernel_neon num_input:%d num_output:%d\n", num_input, num_output);
                     conv_im2col_sgemm_transform_kernel_neon(weight_data, weight_sgemm_data, num_input, num_output, maxk);
                     break;
 //                 case 4:
@@ -385,6 +393,7 @@ int Convolution_arm::create_pipeline(const Option& opt)
 //                     break;
                 case 5:
                     // conv3x3s2
+                    fprintf(stderr, "use conv3x3s2_transform_kernel_neon num_input:%d num_output:%d\n", num_input, num_output);
                     conv3x3s2_transform_kernel_neon(weight_data, weight_3x3s2_data, num_input, num_output);
                     break;
             }
@@ -392,6 +401,7 @@ int Convolution_arm::create_pipeline(const Option& opt)
 
         if (kernel_w == 3 && kernel_h == 3 && dilation_w == 1 && dilation_h == 1 && stride_w == 2 && stride_h == 2)
         {
+            fprintf(stderr, "use conv3x3s2_transform_kernel_neon stride_w :%d num_output:%d\n", stride_w, num_output);
             conv3x3s2_transform_kernel_neon(weight_data, weight_3x3s2_data, num_input, num_output);
         }
 
@@ -430,13 +440,17 @@ int Convolution_arm::destroy_pipeline(const Option& opt)
 
 int Convolution_arm::forward(const Mat& bottom_blob, Mat& top_blob, const Option& opt) const
 {
+    fprintf(stderr, "name:%s type:%s kernel_w:%d dilation_w:%d impl_type:%dd stride_w:%d\n", name.c_str(), type.c_str(), kernel_w, dilation_w, impl_type, stride_w);
     if (bottom_blob.dims != 3)
     {
+        fprintf(stderr, "bottom_blob.dims: %d not 3\n", bottom_blob.dims);
         return Convolution::forward(bottom_blob, top_blob, opt);
     }
 
+
     if (opt.use_int8_inference && weight_data.elemsize == (size_t)1u)
     {
+        fprintf(stderr, " use forward_int8_arm\n");
         return forward_int8_arm(bottom_blob, top_blob, opt);
     }
 
@@ -491,6 +505,9 @@ int Convolution_arm::forward(const Mat& bottom_blob, Mat& top_blob, const Option
     int out_elempack = (opt.use_packing_layout && num_output % 4 == 0) ? 4 : 1;
     size_t out_elemsize = elemsize / elempack * out_elempack;
 
+    fprintf(stderr, "name:%s type:%s kernel_w:%d dilation_w:%d impl_type:%dd stride_w:%d elempack: %d, out_elempack:%d\n", name.c_str(), type.c_str(), kernel_w, dilation_w, impl_type, stride_w, elempack, out_elempack);
+
+
     top_blob.create(outw, outh, num_output / out_elempack, out_elemsize, out_elempack, opt.blob_allocator);
     if (top_blob.empty())
         return -100;
@@ -520,6 +537,7 @@ int Convolution_arm::forward(const Mat& bottom_blob, Mat& top_blob, const Option
             p2 += gap;
         }
     }
+
 
 #if __ARM_NEON
     if (elempack == 4 && out_elempack == 4)
@@ -839,7 +857,15 @@ int Convolution_arm::forward(const Mat& bottom_blob, Mat& top_blob, const Option
         {
             if (use_sgemm1x1)
             {
+                static double conv1x1s1_sgemm_neon_total_time = 0.0;
+
+                double start = get_current_time();
+
                 conv1x1s1_sgemm_neon(bottom_blob_bordered, top_blob, weight_1x1_sgemm_data, bias_data, opt);
+                double end = get_current_time();
+
+                conv1x1s1_sgemm_neon_total_time += end - start;
+                fprintf(stderr, "use conv1x1s1_sgemm_neon time:%f, total %f\n", end - start, conv1x1s1_sgemm_neon_total_time);
             }
             else
             {
@@ -1319,3 +1345,5 @@ int Convolution_arm::forwardDilation_arm(const Mat& bottom_blob, Mat& top_blob, 
 }
 
 } // namespace ncnn
+
+

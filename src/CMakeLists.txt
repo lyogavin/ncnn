@@ -287,9 +287,9 @@ else()
 
     if(PI3)
         target_compile_options(ncnn
-            PRIVATE -march=native -mfpu=neon -mfloat-abi=hard)
+            PRIVATE -marm -march=armv6 -mfpu=vfp -mfloat-abi=hard)# -march=native)
         target_compile_definitions(ncnn
-            PRIVATE __ARM_NEON __ANDROID__)
+            PRIVATE __ANDROID__)
     endif()
     # target_compile_options(ncnn PRIVATE -march=native)
     # set_target_properties(ncnn PROPERTIES INTERPROCEDURAL_OPTIMIZATION ON)

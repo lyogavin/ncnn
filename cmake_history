@@ -1,0 +1,894 @@
+    1  top
+    2  git clone https://github.com/tianyoujian/MZDPI.git
+    3  cd MZDPI/vga
+    4  sudo chmod +x mzdpi-vga-autoinstall-online
+    5  sudo ./mzdpi-vga-autoinstall-online
+    6  sudo apt update
+    7  sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev    pkg-config libgl1-mesa-dev libgles2-mesa-dev    python3-setuptools libgstreamer1.0-dev git-core    gstreamer1.0-plugins-{bad,base,good,ugly}    gstreamer1.0-{omx,alsa} python3-dev libmtdev-dev    xclip xsel libjpeg-dev
+    8  python3 -m pip install --upgrade --user pip setuptools
+    9  python3 -m pip install --upgrade --user Cython==0.29.14 pillow
+   10  python3 -m pip install --user https://github.com/kivy/kivy/archive/master.zip
+   11  sudo reboot
+   12  python3 -m pip install Kivy-examples
+   13  python3 -m pip show Kivy-examples
+   14  cd /home/pi/.local/lib/python3.7/site-packages/Kivy_examples-1.11.1.dist-info/
+   15  ls
+   16  vi ./WHEEL 
+   17  ls
+   18  vi ./top_level.txt 
+   19  cd ..
+   20  ls
+   21  cd kivy/
+   22  ls
+   23  cd ..
+   24  ls
+   25  cd ..
+   26  ls
+   27  cd ..
+   28  ls
+   29  cd share/
+   30  ls
+   31  cd kivy-examples/
+   32  ls
+   33  cd widgets/
+   34  ls
+   35  python3 ./screenmanager.py 
+   36  cd ..
+   37  ls
+   38  cd frameworks/twisted/
+   39  ls
+   40  python3 ./twistd_app.py 
+   41  pip3 install twisted
+   42  python3 ./twistd_app.py 
+   43  sudo raspi-config 
+   44  ifconfig
+   45  hostname
+   46  sudo raspi-config 
+   47  top
+   48  sudo raspi-config 
+   49  cd pulsar_kivy/src/
+   50  python3 ./main.py 
+   51  ls /dev/i2c*
+   52  ls /dev/*i2c*
+   53  sudo reboot
+   54  ls /sys/bus/w1/devices/
+   55  sudo modprobe w1-gpio
+   56  cd pulsar_kivy/src/
+   57  python3 ./main.py 
+   58  sudo vi /boot/config.txt 
+   59  sudo reboot
+   60  vi ./LEDController.py 
+   61  python3 ./LEDController.py 
+   62  cd TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/
+   63  ls
+   64  pip -m tf_venv
+   65  pip
+   66  python3 -m venv  ~/tf_venv
+   67  source ~/tf_venv/bin/activate
+   68  pip install "tensorflow>=2.0.0"
+   69  pip install https://github.com/lhelontra/tensorflow-on-arm/releases/download/v2.1.0/tensorflow-2.1.0-cp35-none-linux_armv6l.whl
+   70  pip install https://github.com/lhelontra/tensorflow-on-arm/releases/download/v2.1.0/tensorflow-2.1.0-cp37-none-linux_armv6l.whl
+   71  free -m
+   72  less
+   73  echo ffkdsal;  | less
+   74  echo ffkdsal | less
+   75  sudo dphys-swapfile swapoff
+   76  vi /etc/dphys-swapfile
+   77  sudo vi /etc/dphys-swapfile
+   78  sudo dphys-swapfile setup
+   79  sudo dphys-swapfile swapon
+   80  free -m
+   81  pip install https://github.com/lhelontra/tensorflow-on-arm/releases/download/v2.1.0/tensorflow-2.1.0-cp37-none-linux_armv6l.whl
+   82  pip install -q imageio
+   83  pip install --upgrade tensorflow-hub
+   84  hostname
+   85  mkdir act_rec_ucf101
+   86  mv ~/main.py  ./act_rec_ucf101/
+   87  cd act_rec_ucf101/
+   88  python3 ./main.py 
+   89  pip install git+https://github.com/tensorflow/docs
+   90  python3 ./main.py 
+   91  pip install ipython
+   92  python3 ./main.py 
+   93  pip install opencv-python
+   94  python3 ./main.py 
+   95  sudo apt-get install libatlas-base-dev libjasper-dev libqtgui4 python3-pyqt5 libqt4-test
+   96  pip install opencv-contrib-python==4.1.0.25
+   97  python3 ./main.py 
+   98  vi ./main.py 
+   99  ls
+  100  cd
+  101  ls
+  102  echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | sudo tee /etc/apt/sources.list.d/coral-edgetpu.list
+  103  curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+  104  sudo apt-get update
+  105  sudo apt-get install libedgetpu1-std
+  106  sudo apt-get install libedgetpu1-max
+  107  ls
+  108  cd TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/
+  109  ls
+  110  cd ..
+  111  ls
+  112  cd pulsar_kivy
+  113  ls
+  114  cd src/pulsarsmartswitch/view/
+  115  ls
+  116  python3 ./StreamingServer.py 
+  117  echo $PYTHONPATH
+  118  pwd
+  119  export PYTHONPATH=/home/pi/pulsar_kivy/src/
+  120  echo $PYTHONPATH
+  121  python3 ./StreamingServer.py 
+  122  vi ../model/ObjectDetector.py 
+  123  python3 ./StreamingServer.py 
+  124  ls
+  125  ls /home/pi/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/Sample_TFLite_model/
+  126  cd
+  127  ls
+  128  wget https://dl.google.com/coral/canned_models/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite
+  129  mv ./mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite /home/pi/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/Sample_TFLite_model/edgetpu.tflite
+  130  cd -
+  131  vi ../model/ObjectDetector.py 
+  132  python3 ./StreamingServer.py 
+  133  vi ../model/ObjectDetector.py 
+  134  python3 ./StreamingServer.py 
+  135  vi ../model/ObjectDetector.py 
+  136  python3 ./StreamingServer.py 
+  137  vi ../model/ObjectDetector.py 
+  138  vim ../model/ObjectDetector.py 
+  139  python3 ./StreamingServer.py 
+  140  vim ../model/ObjectDetector.py 
+  141  python3 ./StreamingServer.py 
+  142  vim ../model/ObjectDetector.py 
+  143  python3 ./StreamingServer.py 
+  144  vim ../model/ObjectDetector.py 
+  145  which libedgetpu
+  146  whereis libedgetpu
+  147  more /proc/cpuinfo | grep flags
+  148  cat /proc/cpuinfo | grep flags
+  149  cat /proc/cpuinfo 
+  150  ls
+  151  gdb
+  152  gdb python3 ./StreamingServer.py
+  153  vim ../model/ObjectDetector.py 
+  154  python3
+  155  apt-get --help
+  156  sudo apt-get install libedgetpu1-std
+  157  whereis libedgetpu1
+  158  whereis libedgetpu1-std
+  159  which libedgetpu1
+  160  which libedgetpu
+  161  whereis libedgetpu-std
+  162  ls /usr/lib/
+  163  python3
+  164  python -m venv ~/tfruntime
+  165  python3 -m venv  ~/tf_runtime
+  166  source ~/tf_runtime/bin/activate
+  167  pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv7l.whl
+  168  pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv6l.whl
+  169  cd
+  170  wget https://github.com/google-coral/edgetpu-platforms/releases/download/v1.9.2/edgetpu_api_1.9.2.tar.gz
+  171  tar xzf ./edgetpu_api_1.9.2.tar.gz 
+  172  cd edgetpu_api/
+  173  ls
+  174  bash ./install.sh 
+  175  python3
+  176  top
+  177  ps aux | grep gdb
+  178  kill -9 2208
+  179  ps aux | grep gdb
+  180  kill -9 2798
+  181  dmes
+  182  dmesg
+  183  less /var/log/syslog
+  184  gdb python3
+  185  sudo python3
+  186  ls
+  187  cd edgetpu_api/
+  188  ls
+  189  bash ./install.sh 
+  190  sudo bash ./install.sh 
+  191  python3
+  192  lsusb
+  193  sudo lsusb
+  194  lsusb
+  195  lsusb --help
+  196  lsusb -t
+  197  sudo reboot
+  198  cd pulsar_kivy
+  199  ls
+  200  cd src/pulsarsmartswitch/view/
+  201  python3 ./StreamingServer.py 
+  202  source ~/tf_runtime/bin/activate
+  203  python3 ./StreamingServer.py 
+  204  ls
+  205  source tf_venv/bin/activate
+  206  cd -
+  207  cd pulsar_kivy/src/pulsarsmartswitch/view/
+  208  python3 ./StreamingServer.py 
+  209  ls
+  210  ls ~/
+  211  raspistill -o ~/test.jpg 
+  212  mkdir pytorch_wheels
+  213  cd pytorch_wheels/
+  214  wget https://github.com/lyogavin/pytorch-arm-builds/raw/master/torch-1.1.0-cp37-cp37m-linux_armv6l.whl
+  215  cd
+  216  mkdir pytorch_training
+  217  #conda env create -f environment.yml
+  218  cd pytorch_training/
+  219  vim ./environment.yml
+  220  conda env create -f environment.yml
+  221  wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-armv7l.sh
+  222  sudo /bin/bash Miniconda3-latest-Linux-armv7l.sh
+  223  ls
+  224  rm ./Miniconda3-latest-Linux-armv7l.sh 
+  225  wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-armv6l.sh
+  226  wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-`uname -m`.sh
+  227  wget https://github.com/jjhelmus/berryconda/releases/download/v2.0.0/Berryconda3-2.0.0-Linux-armv6l.sh
+  228  ls
+  229  wget https://github.com/jjhelmus/berryconda/releases/download/v2.0.0/Berryconda3-2.0.0-Linux-armv6l.sh
+  230  mv ~/Berryconda3-2.0.0-Linux-armv6l.sh ./
+  231  bash ./Berryconda3-2.0.0-Linux-armv6l.sh 
+  232  conda env create -f environment.yml
+  233  cd pytorch_training/
+  234  conda env create -f environment.yml
+  235  python3
+  236  ls
+  237  wget https://github.com/lyogavin/pytorch-arm-builds/blob/master/torch-1.1.0-cp37-cp37m-linux_armv6l.whl
+  238  wget https://github.com/lyogavin/pytorch-arm-builds/raw/master/torch-1.1.0-cp37-cp37m-linux_armv6l.whl
+  239  pip install ./torch-1.1.0-cp37-cp37m-linux_armv6l.whl 
+  240  python3 -m venv ./pip_venv
+  241  vim ~/.bashrc
+  242  cd pytorch_training/
+  243  ls
+  244  python3 -m venv ./pip_venv
+  245  sudo python3 -m venv ./pip_venv
+  246  ensurepip
+  247  python3.7 -m venv myvenv
+  248  . ./myvenv/bin/activate
+  249  ls
+  250  pip install ./torch-1.1.0-cp37-cp37m-linux_armv6l.whl 
+  251  wget https://github.com/lyogavin/pytorch-arm-builds/raw/master/torchvision-0.3.0-cp37-cp37m-linux_armv6l.whl
+  252  pip install ./torchvision-0.3.0-cp37-cp37m-linux_armv6l.whl 
+  253  git clone git@github.com:lyogavin/pytorch-ssd.git
+  254  ls
+  255  cd pytorch-ssd/
+  256  wget -P models https://storage.googleapis.com/models-hao/mb2-ssd-lite-mp-0_686.pth
+  257  wget -P models https://storage.googleapis.com/models-hao/voc-model-labels.txt
+  258  python run_ssd_live_demo.py mb2-ssd-lite models/mb2-ssd-lite-mp-0_686.pth models/voc-model-labels.txt 
+  259  sudo apt-get install libopenblas-dev
+  260  python run_ssd_live_demo.py mb2-ssd-lite models/mb2-ssd-lite-mp-0_686.pth models/voc-model-labels.txt 
+  261  sudo apt install python3-opencv
+  262  sudo apt-get install libatlas-base-dev libjasper-dev libqtgui4 python3-pyqt5 libqt4-test
+  263  sudo apt install python3-opencv
+  264  pip install opencv-contrib-python==4.1.0.25
+  265  python run_ssd_live_demo.py mb2-ssd-lite models/mb2-ssd-lite-mp-0_686.pth models/voc-model-labels.txt 
+  266  cd
+  267  ls
+  268  ll -t
+  269  ls -lt
+  270  free -m
+  271  sudo apt install libopenblas-dev libblas-dev m4 cmake cython python3-dev python3-yaml python3-setuptools
+  272  cd pytorch_training/
+  273  source ./myvenv/bin/activate
+  274  git clone --recursive https://github.com/pytorch/pytorch
+  275  export NO_CUDA=1
+  276  export NO_DISTRIBUTED=1
+  277  export NO_MKLDNN=1 
+  278  export NO_NNPACK=1
+  279  export NO_QNNPACK=1
+  280  nohup python3 setup.py build
+  281  tail -f ./nohup.out 
+  282  cd pytorch
+  283  nohup python3 setup.py build &
+  284  tail -f ./nohup.out 
+  285  less ./nohup.out 
+  286  pip install pyyaml
+  287  nohup python3 setup.py build &
+  288  tail -f ./nohup.out 
+  289  cd -
+  290  source ./pytorch_training/myvenv/bin/activate
+  291  cd pytorch_training/
+  292  ls
+  293  cd pytorch
+  294  less ./nohup.out 
+  295  nohup python3 setup.py build &
+  296  tail -f ./nohup.out 
+  297  dmesg
+  298  lsusb
+  299  dmesg
+  300  dmesg > ~/dmesg_output
+  301  lsusb > ~/lsusb_output
+  302  tail -f ./nohup.out 
+  303  cd pytorch_training/
+  304  cd pytorch
+  305  tail -f ./nohup.out 
+  306  less ./nohup.out 
+  307  man make
+  308  cd ..
+  309  ls
+  310  source ./pytorch_training/myvenv/bin/activate
+  311  cd ..
+  312  source ./pytorch_training/myvenv/bin/activate
+  313  cd pytorch_training/pytorch
+  314  nohup python3 setup.py build &
+  315  tail -f ./nohup.out 
+  316  cd pytorch_training/pytorch
+  317  tail -f ./nohup.out 
+  318  less ./nohup.out 
+  319  nohup python3 setup.py build &
+  320  less ./nohup.out 
+  321  ps aux | grep python3
+  322  less ./nohup.out 
+  323  kill -9 12355
+  324  cd ..
+  325  source ./pytorch_training/myvenv/bin/activate
+  326  cd ..
+  327  source ./pytorch_training/myvenv/bin/activate
+  328  cd pytorch_training/pytorch
+  329  nohup python3 setup.py build &
+  330  tail -f ./nohup.out 
+  331  cd pytorch_training/
+  332  cd pytorch
+  333  less ./nohup.out 
+  334  tail -f ./nohup.out 
+  335  cd pytorch_training/pytorch
+  336  tail -f ./nohup.out 
+  337  ls
+  338  cd pytorch_
+  339  cd pytorch_training/
+  340  ls
+  341  cd pytorch
+  342  ls
+  343  less ./nohup.out 
+  344  tail -f ./nohup.out 
+  345  cd pytorch_training/
+  346  cd pytorch
+  347  tail -f ./nohup.out 
+  348  ls
+  349  cd pytorch_training/
+  350  cd pytorch
+  351  tail -f ./nohup.out 
+  352  cd /home/pi/pytorch_training/pytorch/
+  353  tail -f ./nohup.out 
+  354  ps aux | grep python
+  355  ps aux | grep setup
+  356  ps aux | grep python
+  357  kill -9 18432 18431 18430
+  358  top
+  359  cd
+  360  git clone https://github.com/Tencent/ncnn.git
+  361  cd ncnn/
+  362  mkdir -p build
+  363  cd build/
+  364  nohup cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake -DPI3=ON .. &
+  365  tail -p nohup.out 
+  366  tail -f nohup.out 
+  367  ls
+  368  nohup make -j4
+  369  nohup make install 
+  370  cd
+  371  cd opencv-4.3.0/
+  372  tail -f nohup.out 
+  373  ll ./
+  374  cd build/
+  375  tail -f nohup.out 
+  376  to
+  377  top
+  378  cd ncnn/build/
+  379  tail -f ./nohup.out 
+  380  top
+  381  tail -f ./nohup.out 
+  382  ls
+  383  cd
+  384  ls
+  385  cd ncnn
+  386  ls
+  387  mkdir models
+  388  cd ..
+  389  git clone https://github.com/alibaba/MNN.git
+  390  cd MNN/
+  391  vim CMakeLists.txt 
+  392  ./schema/generate.sh 
+  393  cd
+  394  ls
+  395  cd ncnn/
+  396  ls
+  397  cd examples/
+  398  ls
+  399  cd squeezencnn/
+  400  ls
+  401  cd ..
+  402  sudo apt-get install libatlas-base-dev libjasper-dev libqtgui4 python3-pyqt5 libqt4-test
+  403  sudo apt install python3-opencv
+  404  pip install opencv-contrib-python==4.1.0.25
+  405  less ./nohu
+  406  ls
+  407  cd build/
+  408  less ./nohup.out 
+  409  whereis OpenCv
+  410  whereis opencv
+  411  which opencv
+  412  which OpenCv
+  413  less ./nohup.out 
+  414  cd
+  415  git clone https://github.com/opencv/opencv.git
+  416  wget https://github.com/opencv/opencv/archive/4.3.0.zip
+  417  unzip ./4.3.0.zip 
+  418  cd opencv-4.3.0/
+  419  ls
+  420  mkdir build
+  421  cd build/
+  422  nohpu cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local .. &
+  423  nohup  cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local .. &
+  424  tail -f ./nohup.out 
+  425  make
+  426  nohup make
+  427  cd opencv-4.3.0/
+  428  cd build/
+  429  less ./nohup.out 
+  430  tail -f ./nohup.out 
+  431  cd opencv-4.3.0/
+  432  ls
+  433  cd build/
+  434  tail -f ./nohup.out 
+  435  ps aux | grep make
+  436  less ./nohup.out 
+  437  nohup sudo make install &
+  438  tail -f ./nohup.out 
+  439  cd
+  440  cd ncnn/
+  441  cd build/
+  442  cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake -DPI3=ON ..
+  443  vim ../CMakeLists.txt 
+  444  vim ../examples/CMakeLists.txt 
+  445  vim ../tools/onnx/CMakeLists.txt 
+  446  vim ../examples/CMakeLists.txt 
+  447  sudo apt-get install protobuf-compiler
+  448  protoc --version
+  449  cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake -DPI3=ON ..
+  450  nohup make -j4 &
+  451  tail -f ./nohup.out 
+  452  ls
+  453  make install
+  454  cd ..
+  455  cd examples/
+  456  ls
+  457  ./mobilenetv2ssdlite.cpp 
+  458  ll -t
+  459  ll ./*
+  460  ls -lt ./*
+  461  vim ./mobilenetv2ssdlite.cpp 
+  462  ls
+  463  cd ..
+  464  cd build/
+  465  ls
+  466  cd examples/
+  467  ls
+  468  ./mobilenetv2ssdlite 
+  469  ./mobilenetv2ssdlite ~/test.jpg 
+  470  ll ~/test.jpg 
+  471  ls -l ~/test.jpg 
+  472  vim ../../examples/mobilenetv2ssdlite.cpp 
+  473  ./squeezenetssd ~/test.jpg 
+  474  gdb ./mobilenetv2ssdlite 
+  475  cd ..
+  476  vim ../CMakeLists.txt 
+  477  vim ../src/CMakeLists.txt 
+  478  cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake -DPI3=ON ..
+  479  nohup make -j4 &
+  480  tail -f ./nohup.out 
+  481  make clean
+  482  nohup make -j4 &
+  483  tail -f ./nohup.out 
+  484  cd ..
+  485  git diff
+  486  grep -R neon *
+  487  grep -R neon * | grep CMake
+  488  grep -R neon * | grep CMake | grep txt
+  489  git diff
+  490  grep -R neon * | grep CMake | grep txt
+  491  cd build/
+  492  cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake -DANDROID_ARM_NEON=OFF -DPI3=ON ..
+  493  cd ..
+  494  vim ./CMakeLists.txt 
+  495  vim ./src/CMakeLists.txt 
+  496  cd build/
+  497  cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake  -DPI3=ON ..
+  498  make clean
+  499  make
+  500  cd examples/
+  501  ls
+  502  ./mobilenetv2ssdlite ~/test.jpg 
+  503  wget https://github.com/nihui/ncnn-assets/raw/master/models/mobilenetv2_ssdlite_voc.param
+  504  wget https://raw.githubusercontent.com/nihui/ncnn-assets/master/models/mobilenetv2_ssdlite_voc.param
+  505  head ./mobilenetv2_ssdlite_voc.param 
+  506  wget https://github.com/nihui/ncnn-assets/raw/master/models/mobilenetv2_ssdlite_voc.bin
+  507  ./mobilenetv2ssdlite ~/test.jpg 
+  508  gdb ./mobilenetv2ssdlite 
+  509  cd ../../
+  510  mkdir -p build-arm-linux-gnueabi
+  511  cd build-arm-linux-gnueabi
+  512  vim ../CMakeLists.txt 
+  513  cd ../build
+  514  vim ../src/CMakeLists.txt 
+  515  cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake  -DPI3=ON ..
+  516  make clean
+  517  make
+  518  cd examples/
+  519  ls
+  520  ./mobilenetv2ssdlite ~/test.jpg 
+  521  gdb ./mobilenetv2ssdlite 
+  522  make test
+  523  cd ..
+  524  make test
+  525  ls
+  526  cd benchmark/
+  527  ls
+  528  ./benchncnn 
+  529  cp ../examples/mobilenetv2* ./
+  530  ls
+  531  ./benchncnn 
+  532  ls
+  533  cp ../../benchmark/*.param ./
+  534  ./benchncnn 
+  535  cd ../
+  536  cd ..
+  537  ls
+  538  cd src/
+  539  ls
+  540  cd ..
+  541  ls
+  542  cd src/
+  543  vim ./CMakeLists.txt 
+  544  ls
+  545  cd layer/
+  546  ls
+  547  cd arm/
+  548  ls
+  549  cd ..
+  550  ls
+  551  vim ./CMakeLists.txt 
+  552  cd ..
+  553  ls
+  554  cd toolchains/
+  555  ls
+  556  vim ./pi3.toolchain.cmake 
+  557  cd ..
+  558  ls
+  559  cd build
+  560  vim ../src/CMakeLists.txt 
+  561  git diff
+  562  vim ../toolchains/pi3.toolchain.cmake 
+  563  cmake -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake  -DPI3=ON ..
+  564  make clean;make
+  565  cd examples/
+  566  ./mobilenetv2ssdlite ~/test.jpg 
+  567  gdb ./mobilenetv2ssdlite 
+  568  cmake -DCMAKE_BUILD_TYPE=debug -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake  -DPI3=ON ..
+  569  make clean
+  570  nohup make &
+  571  cd ..
+  572  cd examples/
+  573  tail -f ./nohup.out 
+  574  ps aux | grep make
+  575  kill -9 11280 11275 11281 11291
+  576  ps aux | grep make
+  577  cd ..
+  578  cmake -DCMAKE_BUILD_TYPE=debug -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake  -DPI3=ON ..
+  579  make clean
+  580  nohup make &
+  581  tail -f ./nohup.out 
+  582  cd examples/
+  583  ./mobilenetv2ssdlite ~/test.jpg 
+  584  gdb ./mobilenetv2ssdlite 
+  585  free -m
+  586  vim ../../examples/mobilenetv2ssdlite.cpp 
+  587  make
+  588  ls
+  589  ll -t
+  590  ls -lht
+  591  gdb ./mobilenetv2ssdlite 
+  592  cd ..
+  593  git diff ../CMakeLists.txt
+  594  cd ..
+  595  git diff
+  596  vim ./src/CMakeLists.txt 
+  597  cd build
+  598  cmake -DCMAKE_BUILD_TYPE=debug -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake  -DPI3=ON ..
+  599  make clean
+  600  nohup make &
+  601  tail -f ./nohup.out 
+  602  cd ../examples/
+  603  git diff
+  604  cd ..
+  605  cd build
+  606  make
+  607  vim ../src/CMakeLists.txt 
+  608  cmake -DCMAKE_BUILD_TYPE=debug -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake  -DPI3=ON ..
+  609  make clean
+  610  cd
+  611  ls
+  612  cd MNN
+  613  ls
+  614  ./schema/generate.sh
+  615  cd buil
+  616  mkdir build
+  617  cd build/
+  618  cmake -DMNN_BUILD_CONVERTER=true -DMNN_BUILD_HARD=true -DMNN_BUILD_TOOLS=true -DMNN_BUILD_DEMO=true -DMNN_BUILD_QUANTOOLS=true 
+  619  cd ..
+  620  ls
+  621  cd build/
+  622  ls
+  623  cmake -DMNN_BUILD_CONVERTER=true -DMNN_BUILD_HARD=true -DMNN_BUILD_TOOLS=true -DMNN_BUILD_DEMO=true -DMNN_BUILD_QUANTOOLS=true ..
+  624  nohup make &
+  625  tail -f ./nohup.out 
+  626  cmake -DMNN_BUILD_CONVERTER=true -DMNN_BUILD_HARD=true -DMNN_BUILD_TOOLS=true -DMNN_BUILD_DEMO=true -DMNN_BUILD_QUANTOOLS=true -DMNN_OPENCL=false ..
+  627  cmake -DMNN_BUILD_CONVERTER=ON -DMNN_BUILD_HARD=ON -DMNN_BUILD_TOOLS=ON -DMNN_BUILD_DEMO=ON -DMNN_BUILD_QUANTOOLS=ON -DMNN_OPENCL=OFF ..
+  628  nohup make &
+  629  tail -f ./nohup.out 
+  630  ls
+  631  ./mobilenetTest.out 
+  632  cd express/
+  633  ls
+  634  cd ..
+  635  ls
+  636  cd source/
+  637  ls
+  638  cd ..
+  639  ls
+  640  cd demo/
+  641  ls
+  642  cd model/
+  643  ls
+  644  cd MobileNet/
+  645  ls
+  646  cd ../../
+  647  ls
+  648  cd ..
+  649  ls
+  650  vim ./README.md 
+  651  cd build/
+  652  ls
+  653  cd ..
+  654  ls
+  655  cd demo/
+  656  ls
+  657  cd model/
+  658  ls
+  659  cd MobileNet/
+  660  ls
+  661  wget https://storage.googleapis.com/download.tensorflow.org/models/tflite_11_05_08/mobilenet_v2_1.0_224_quant.tgz
+  662  ls
+  663  tar xzf ./mobilenet_v2_1.0_224_quant.tgz 
+  664  ls
+  665  ../../../build/MNNConvert -f ./mobilenet_v2_1.0_224_quant.tflite  --MNNModel mobilenet_v2_1.0_224_quant.mnn --bizCode biz
+  666  ../../../build/MNNConvert -f TFLITE --modelFile ./mobilenet_v2_1.0_224_quant.tflite  --MNNModel mobilenet_v2_1.0_224_quant.mnn --bizCode biz
+  667  ls
+  668  cd ../
+  669  cd ..
+  670  ls
+  671  cd ..
+  672  ls
+  673  cd build/
+  674  ls
+  675  ./mobilenetTest.out 
+  676  ./mobilenetTest.out ../demo/model/MobileNet/mobilenet_v2_1.0_224_quant.mnn ../demo/model/MobileNet/testcat.jpg ../demo/model/MobileNet/synset_words.txt 
+  677  gdb ./mobilenetTest.out 
+  678  cd
+  679  cd ncnn/
+  680  ls
+  681  cd build
+  682  ls
+  683  cd examples/
+  684  ls
+  685  cd Testing/
+  686  ls
+  687  cd ..
+  688  ls
+  689  cd ..
+  690  ls
+  691  cd tests/
+  692  ls
+  693  cd ..
+  694  nohup make &
+  695  tail -f ./nohup.out 
+  696  ls
+  697  ./tools/ncnnoptimize 
+  698  ./tools/ncnnoptimize ./examples/mobilenetv2_ssdlite_voc.param ./examples/mobilenetv2_ssdlite_voc.bin out.param out.bin 0
+  699  ./tools/ncnnoptimize ./examples/mobilenetv2_ssdlite_voc.param ./examples/mobilenetv2_ssdlite_voc.bin out.param out.bin 0 ~/test.jpg 227 227 3
+  700  ./tools/ncnnoptimize ./examples/mobilenetv2_ssdlite_voc.param ./examples/mobilenetv2_ssdlite_voc.bin out.param out.bin 
+  701  ./tools/ncnnoptimize ./examples/mobilenetv2_ssdlite_voc.param ./examples/mobilenetv2_ssdlite_voc.bin out.param out.bin 1
+  702  cd examples/
+  703  ls
+  704  ./mobilenetv2ssdlite 
+  705  vim ../../examples/mobilenetv2ssdlite.cpp 
+  706  gdb ./mobilenetv2ssdlite 
+  707  cd ..
+  708  git checkout 57bedd5
+  709  git diff
+  710  git checkout -- examples/mobilenetv2ssdlite.cpp
+  711  git diff
+  712  git diff  > ~/ncnn_make_diff_backup.diff
+  713  git status
+  714  git add ./src/
+  715  git add ./toolchains/
+  716  git commit -m "make diff"
+  717  git checkout 57bedd5
+  718  cd build
+  719  nohup make &
+  720  tail -f ./nohup.out 
+  721  cd examples/
+  722  ls
+  723  ./mobilenetv2ssdlite ~/053oq2xB3oU_000006.jpg 
+  724  gdb ./mobilenetv2ssdlite ~/053oq2xB3oU_000006.jpg 
+  725  ls
+  726  cd ..
+  727  ls
+  728  cd benchmark/
+  729  ls
+  730  ./benchncnn 
+  731  ./mobilenetv2ssdlite 
+  732  ./mobilenetv2ssdlite ~/test.jpg 
+  733  gdb ./mobilenetv2ssdlite 
+  734  git status
+  735  vim ../../src/CMakeLists.txt 
+  736  vim ~/ncnn_make_diff_backup.diff 
+  737  cd ..
+  738  make
+  739  cd examples/
+  740  ls
+  741  ./mobilenetv2ssdlite ~/test.jpg 
+  742  cd ..
+  743  ls
+  744  cd benchmark/
+  745  ls
+  746  ./benchncnn 
+  747  cd ..
+  748  cd examples/
+  749  ls
+  750  cd ../benchmark/
+  751  ls
+  752  ./benchncnn --help
+  753  cd ..
+  754  ls
+  755  cd Testing/
+  756  ls
+  757  cd ..
+  758  cd tests/
+  759  ls
+  760  cd ../examples/
+  761  ls
+  762  time ./mobilenetv2ssdlite ~/053oq2xB3oU_000006.jpg
+  763  cd .
+  764  cd ..
+  765  ls
+  766  cd tools/
+  767  ls
+  768  ./ncnnoptimize 
+  769  ./ncnnoptimize ../examples/mobilenetv2_ssdlite_voc.param ../examples/mobilenetv2_ssdlite_voc.bin out.param out.bin 0
+  770  cd ..
+  771  ls
+  772  cd examples/
+  773  ls
+  774  vim ./mobilenetv2ssdlite.cpp 
+  775  make
+  776  cd ../build/examples/
+  777  make
+  778  time ./mobilenetv2ssdlite ~/053oq2xB3oU_000006.jpg
+  779  vim ./mobilenetv2ssdlite.cpp 
+  780  vim ../../examples/mobilenetv2ssdlite.cpp 
+  781  ls
+  782  ls -l
+  783  cd ..
+  784  ls
+  785  cd tools/
+  786  ls
+  787  ll -l
+  788  ls -l
+  789  cp ./out.* ../examples/
+  790  cd ../examples/
+  791  ls
+  792  mv ./mobilenetv2_ssdlite_voc.bin ./mobilenetv2_ssdlite_voc.bin.origin
+  793  mv ./mobilenetv2_ssdlite_voc.param ./mobilenetv2_ssdlite_voc.param.origin
+  794  mv ./out.param ./mobilenetv2_ssdlite_voc.param
+  795  mv ./out.bin ./mobilenetv2_ssdlite_voc.bin
+  796  time ./mobilenetv2ssdlite ~/053oq2xB3oU_000006.jpg
+  797  cd ../tools/
+  798  s
+  799  ls
+  800  cd quantize/
+  801  ls
+  802  ./ncnn2int8 
+  803  ls
+  804  cd ..
+  805  ls
+  806  cp ./out.* pi@ubutupi.local:~/
+  807  scp ./out.* pi@ubutupi.local:~/
+  808  ls
+  809  cd ../examples/
+  810  ls
+  811  mv ./mobilenetv2_ssdlite_voc.bin ./mobilenetv2_ssdlite_voc.bin.optmized 
+  812  mv ./mobilenetv2_ssdlite_voc.param ./mobilenetv2_ssdlite_voc.param.optmized
+  813  scp  pi@ubutupi.local:~/ncnn/build/tools/quantize/int8out.* ./
+  814  mv ./int8out.param ./mobilenetv2_ssdlite_voc.param
+  815  mv ./int8out.bin ./mobilenetv2_ssdlite_voc.bin
+  816  ll -t
+  817  ls -lt
+  818  time ./mobilenetv2ssdlite ~/053oq2xB3oU_000006.jpg
+  819  sudo raspi-config 
+  820  cd ncnn
+  821  ls
+  822  cd examples/
+  823  ls
+  824  man vmlaq_f32
+  825  man vmlaq
+  826  free -m
+  827  cd
+  828  cd MNN/build/
+  829  tail -f ./nohup.out 
+  830  cat ~/.ssh/authorized_keys 
+  831  cat ~/.vimrc 
+  832  cd
+  833  cd ncnn/
+  834  ls
+  835  cd build/examples/
+  836  ls
+  837  cd ..
+  838  make
+  839  ps aux | grep make
+  840  cd ncnn/
+  841  ls
+  842  cd examples/
+  843  vim ./mobilenetv2ssdlite.cpp 
+  844  cd ../build/examples/
+  845  make
+  846  vim ./mobilenetv2ssdlite.cpp 
+  847  vim ../../examples/mobilenetv2ssdlite.cpp 
+  848  make
+  849  time ./mobilenetv2ssdlite ~/053oq2xB3oU_000006.jpg
+  850  ls
+  851  mv ./mobilenetv2_ssdlite_voc.bin ./mobilenetv2_ssdlite_voc.bin.quant 
+  852  mv ./mobilenetv2_ssdlite_voc.param ./mobilenetv2_ssdlite_voc.param.quant
+  853  cp ./mobilenetv2_ssdlite_voc.bin.optmized ./mobilenetv2_ssdlite_voc.bin
+  854  cp ./mobilenetv2_ssdlite_voc.param.optmized ./mobilenetv2_ssdlite_voc.param
+  855  cp ./mobilenetv2_ssdlite_voc.bin.optmized ./mobilenetv2_ssdlite_voc.bin
+  856  time ./mobilenetv2ssdlite ~/053oq2xB3oU_000006.jpg
+  857  cd
+  858  ls
+  859  cd TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/
+  860  ls
+  861  cd Sample_TFLite_model/
+  862  ls
+  863  cd ..
+  864  ls
+  865  vim ./TFLite_detection_image.py 
+  866  python3 ./TFLite_detection_image.py 
+  867  python3 ./TFLite_detection_image.py --modeldir ./Sample_TFLite_model/ --labels ./Sample_TFLite_model/labelmap.txt --image ./test1.jpg 
+  868  pwd
+  869  python3 /home/pi/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/TFLite_detection_image.py --modeldir /home/pi/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/Sample_TFLite_model/ --labels /home/pi/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/Sample_TFLite_model/labelmap.txt --image /home/pi/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/test1.jpg 
+  870  cd
+  871  cd ncnn/
+  872  cd build
+  873  ls
+  874  cd ..
+  875  mkdir build_gprof
+  876  cd build_gprof/
+  877  cd ../build
+  878  cmake -DCMAKE_BUILD_TYPE=release -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake  -DPI3=ON ..
+  879  nohup make &
+  880  tail -f ./nohup.out 
+  881  cd examples/
+  882  ls
+  883  ./mobilenetv2ssdlite ~/053oq2xB3oU_000006.jpg 
+  884  ll -l ./mobile*
+  885  ls -lt ./mobile*
+  886  ls -lt | head
+  887  cp ./mobilenetv2_ssdlite_voc.param.quant ./mobilenetv2_ssdlite_voc.param
+  888  cp ././mobilenetv2_ssdlite_voc.bin.quant ./mobilenetv2_ssdlite_voc.bin
+  889  ./mobilenetv2ssdlite ~/053oq2xB3oU_000006.jpg 
+  890  cd ../
+  891  cd ..
+  892  cd build_gprof/
+  893  cmake -DCMAKE_BUILD_TYPE=release -DCMAKE_CXX_FLAGS=-pg -DCMAKE_EXE_LINKER_FLAGS=-pg -DCMAKE_SHARED_LINKER_FLAGS=-pg -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake  -DPI3=ON ..
+  894  history > ../cmake_history

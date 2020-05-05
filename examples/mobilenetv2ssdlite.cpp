@@ -20,6 +20,8 @@
 
 #include "platform.h"
 #include "net.h"
+
+#include "benchmark.h"
 #if NCNN_VULKAN
 #include "gpu.h"
 #endif // NCNN_VULKAN
@@ -63,12 +65,22 @@ static int detect_mobilenetv2(const cv::Mat& bgr, std::vector<Object>& objects)
 
     ncnn::Extractor ex = mobilenetv2.create_extractor();
     ex.set_light_mode(true);
-    ex.set_num_threads(4);
+    ex.set_num_threads(1);
 
-    ex.input("data", in);
-
+    double start = ncnn::get_current_time();
     ncnn::Mat out;
-    ex.extract("detection_out",out);
+    for (int i=0; i<1; i++)
+    {
+        ex.input("data", in);
+
+        ex.extract("detection_out",out);
+    }
+
+    double end = ncnn::get_current_time();
+
+    double time = end - start;
+
+    printf("elapsed time: %f\n", time);
 
 //     printf("%d %d %d\n", out.w, out.h, out.c);
     objects.clear();
@@ -131,8 +143,9 @@ static void draw_objects(const cv::Mat& bgr, const std::vector<Object>& objects)
                     cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));
     }
 
-    cv::imshow("image", image);
-    cv::waitKey(0);
+    //cv::imshow("image", image);
+    cv::imwrite("./output.jpg", image);
+    //cv::waitKey(0);
 }
 
 int main(int argc, char** argv)

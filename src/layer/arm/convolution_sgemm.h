@@ -11,6 +11,7 @@
 // under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
+#include "benchmark.h"
 
 static void conv_im2col_sgemm_transform_kernel_neon(const Mat& _kernel, Mat& kernel_tm, int inch, int outch, int kernel_size)
 {
@@ -246,6 +247,7 @@ static void conv_im2col_sgemm_neon(const Mat &bottom_blob, Mat &top_blob, const 
         }       
     }
     
+    double start= ncnn::get_current_time();
     // sgemm(int M, int N, int L, float* A, float* B, float* C)
     {
         //int M = outch;                    // outch
@@ -1530,4 +1532,9 @@ static void conv_im2col_sgemm_neon(const Mat &bottom_blob, Mat &top_blob, const 
             }
         }
     }   
+    double end = ncnn::get_current_time();
+
+    double time = end - start;
+
+    printf("sgemm elapsed time: %f\n", time);
 }
