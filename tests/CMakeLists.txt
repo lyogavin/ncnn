@@ -15,6 +15,8 @@ endmacro()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src)
 
+target_link_libraries(test_convolution libQPULib.a)
+
 ncnn_add_layer_test(AbsVal)
 ncnn_add_layer_test(BatchNorm)
 ncnn_add_layer_test(BinaryOp)
