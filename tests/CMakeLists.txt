@@ -4,8 +4,11 @@ macro(ncnn_add_layer_test class)
 
     # enable if WITH_LAYER_xxx option ON
     if(${WITH_LAYER_${name}})
+        set(CMAKE_CXX_FLAGS "-DQPU_MODE -fpermissive -Wconversion -std=c++0x ")
+         
+
         add_executable(test_${name} test_${name}.cpp)
-        target_link_libraries(test_${name} PRIVATE ncnn)
+        target_link_libraries(test_${name} PRIVATE ncnn libQPULib.a)
         add_test(test_${name} test_${name})
 
         # add test to a virtual project group
@@ -15,7 +18,6 @@ endmacro()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src)
 
-target_link_libraries(test_convolution libQPULib.a)
 
 ncnn_add_layer_test(AbsVal)
 ncnn_add_layer_test(BatchNorm)
@@ -47,3 +49,4 @@ ncnn_add_layer_test(Sigmoid)
 ncnn_add_layer_test(Slice)
 ncnn_add_layer_test(Softmax)
 ncnn_add_layer_test(UnaryOp)
+

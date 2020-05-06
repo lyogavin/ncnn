@@ -287,9 +287,10 @@ else()
 
     if(PI3)
         target_compile_options(ncnn
-            PRIVATE -marm -march=armv6 -mfpu=vfp -mfloat-abi=hard)# -march=native)
+            PRIVATE -marm -march=armv6 -mfpu=vfp -mfloat-abi=hard -DQPU_MODE -fpermissive -Wconversion -std=c++0x)# -march=native)
+            #set(CMAKE_CXX_FLAGS "-DQPU_MODE -fpermissive -Wconversion -std=c++0x ")
         target_compile_definitions(ncnn
-            PRIVATE __ANDROID__)
+            PRIVATE __ANDROID__  )
     endif()
     # target_compile_options(ncnn PRIVATE -march=native)
     # set_target_properties(ncnn PROPERTIES INTERPROCEDURAL_OPTIMIZATION ON)
