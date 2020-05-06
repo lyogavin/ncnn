@@ -2077,12 +2077,12 @@ static void conv1x1s1_sgemm_qpulib(Ptr<Float> bottom, Ptr<Float> top, Ptr<Float>
     Float top_last;
     Float bias_last;
 
-    For (Int k = me(), k < top.c, k += outch_inc)
-        Ptr<Float> kernel_ptr = kernel + k * bottom.c;
+    For (Int k = me(), k < top_blob.c, k += outch_inc)
+        Ptr<Float> kernel_ptr = kernel + k * bottom_blob.c;
         Ptr<Float> bias_ptr = bias + k;
 
         For (Int j = 0, j < bottom_blob.c, j += 1)
-            Ptr<Float> top_ptr = top + index() + k * top.w * top.h;
+            Ptr<Float> top_ptr = top + index() + k * top_blob.w * top_blob.h;
 
             gather(kernel_ptr);
             receive(kernel_last);
@@ -2116,7 +2116,7 @@ static void conv1x1s1_sgemm_qpulib(Ptr<Float> bottom, Ptr<Float> top, Ptr<Float>
 
             Ptr<Float> bottom_ptr_by_one = bottom + i + bottom_blob.w * bottom_blob.h * j;
             gather(bottom_ptr_by_one);
-            Ptr<Float> top_ptr_by_one = top + i + k * top.w * top.h;
+            Ptr<Float> top_ptr_by_one = top + i + k * top_blob.w * top_blob.h;
             gather(top_ptr_by_one);
 
             Float bottom_last_by_one;
