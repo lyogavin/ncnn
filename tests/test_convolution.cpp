@@ -18,6 +18,7 @@
 
 #include "layer_type.h"
 
+#include <QPULib.h>
 
 namespace ncnn {
 #include "layer/arm/convolution_1x1.h"
