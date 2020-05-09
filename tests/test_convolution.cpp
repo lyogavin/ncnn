@@ -12,13 +12,15 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
+
+#include <QPULib.h>
+
 #include "testutil.h"
 
 #include "layer/convolution.h"
 
 #include "layer_type.h"
 
-#include <QPULib.h>
 
 namespace ncnn {
 #include "layer/arm/convolution_1x1.h"
