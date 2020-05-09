@@ -861,7 +861,13 @@ int Convolution_arm::forward(const Mat& bottom_blob, Mat& top_blob, const Option
 
                 double start = get_current_time();
 
-                conv1x1s1_sgemm_neon(bottom_blob_bordered, top_blob, weight_1x1_sgemm_data, bias_data, opt);
+                if (bottom_blob_bordered.c == 16 && top_blob.c == 96){
+                    conv1x1s1_sgemm_qpu(bottom_blob_bordered, top_blob, weight_1x1_sgemm_data, bias_data, opt);
+
+                } else {
+                    conv1x1s1_sgemm_neon(bottom_blob_bordered, top_blob, weight_1x1_sgemm_data, bias_data, opt);
+                }
+
                 double end = get_current_time();
 
                 conv1x1s1_sgemm_neon_total_time += end - start;

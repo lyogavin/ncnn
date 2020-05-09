@@ -4,7 +4,7 @@ macro(ncnn_add_layer_test class)
 
     # enable if WITH_LAYER_xxx option ON
     if(${WITH_LAYER_${name}})
-        set(CMAKE_CXX_FLAGS "-DQPU_MODE -fpermissive -Wconversion -std=c++0x ")
+#        set(CMAKE_CXX_FLAGS "-DQPU_MODE -fpermissive -Wconversion -std=c++0x ")
          
 
         add_executable(test_${name} test_${name}.cpp)

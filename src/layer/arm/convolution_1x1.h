@@ -2064,101 +2064,11 @@ static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Ma
 //     }
 }
 
-static void conv1x1s1_sgemm_qpulib(Ptr<Float> bottom, Ptr<Float> top, Ptr<Float> kernel, Ptr<Float> bias,
-                                   const Mat& bottom_blob, Mat& top_blob, const Mat& kernel_blob, const Mat& bias_blocb)
-{
-    // 1. multiple QPU...
-    Int outch_inc = numQPUs();
-
-    Int inc = 16;//numQPUs() << 4;
-
-    Float bottom_last;
-    Float kernel_last;
-    Float top_last;
-    Float bias_last;
-
-    For (Int k = me(), k < top_blob.c, k += outch_inc)
-        Ptr<Float> kernel_ptr = kernel + k * bottom_blob.c;
-        Ptr<Float> bias_ptr = bias + k;
-
-        For (Int j = 0, j < bottom_blob.c, j += 1)
-            Ptr<Float> top_ptr = top + index() + k * top_blob.w * top_blob.h;
-
-            gather(kernel_ptr);
-            receive(kernel_last);
-            gather(bias_ptr);
-            receive(bias_last);
-
-            Int i  = 0;
-
-            Ptr<Float> bottom_ptr = bottom + index() + bottom_blob.w * bottom_blob.h * j;
-
-            gather(bottom_ptr);
-            gather(top_ptr);
-
-            For (i = 0, i < bottom_blob.w * bottom_blob.h, i += inc)
-                gather(bottom_ptr + inc);
-                gather(top_ptr + inc);
-                receive(bottom_last);
-                receive(top_last);
-
-                store(bottom_last * kernel_last + top_last, top_ptr);
-
-                bottom_ptr = bottom_ptr + inc;
-                top_ptr = top_ptr + inc;
-            End
-
-            // gather the rest one by one
-            receive(bottom_last);
-            receive(top_last);
-
-            i =  i - inc;
-
-            Ptr<Float> bottom_ptr_by_one = bottom + i + bottom_blob.w * bottom_blob.h * j;
-            gather(bottom_ptr_by_one);
-            Ptr<Float> top_ptr_by_one = top + i + k * top_blob.w * top_blob.h;
-            gather(top_ptr_by_one);
-
-            Float bottom_last_by_one;
-            Float top_last_by_one;
-
-            For (, i < bottom_blob.w * bottom_blob.h, i += 1)
-                gather(bottom_ptr_by_one + 1);
-                gather(top_ptr_by_one + 1);
-                receive(bottom_last_by_one);
-                receive(top_last_by_one);
-
-                store(bottom_last_by_one * kernel_last + top_last_by_one, top_ptr_by_one);
-
-                bottom_ptr_by_one = bottom_ptr_by_one + 1;
-                top_ptr_by_one = top_ptr_by_one + 1;
-            End
-            receive(bottom_last_by_one);
-            receive(top_last_by_one);
-
-            kernel_ptr = kernel_ptr + 1;
-            bias_ptr = bias_ptr + 1;
-        End
-    End
-
-    // Discard pre-fetched vectors from final iteration
-    //receive(kernel_last);
-    //receive(bottom_last);
-    //receive(top_last);
-}
-
 static void conv1x1s1_sgemm_qpu(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
 {
-    int padding = 16;
-    // 1. copy data to shared memeory...
-    SharedArray<float> bottom_shar(bottom_blob.total() * bottom_blob.elemsize + padding);
-    memcpy(bottom_shar.getPointer(), bottom_blob.data, bottom_blob.total() * bottom_blob.elemsize)
-    SharedArray<float> top_shar(top_blob.total() * top_blob.elemsize + padding);
-    memcpy(top_shar.getPointer(), top_blob.data, top_blob.total() * top_blob.elemsize)
-    SharedArray<float> kernel_shar(kernel.total() * kernel.elemsize + padding);
-    memcpy(kernel_shar.getPointer(), kernel.data, kernel.total() * kernel.elemsize)
-    SharedArray<float> bias_shar(_bias.total() * _bias.elemsize);
-    memcpy(bias_shar.getPointer(), _bias.data, _bias.total() * _bias.elemsize)
+
+    conv1x1s1_sgemm_qpu(bottom_blob.data, top_blob.data, kernel.data, _bias.data, 0, 0,
+                        bottom_blob.w, bottom_blob.h, bottom_blob.c, top_blob.c, sizeof(float));
 
 }
 
