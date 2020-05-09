@@ -289,7 +289,7 @@ else()
         target_compile_options(ncnn
             #PRIVATE -marm -march=armv6 -mfpu=vfp -mfloat-abi=hard -DQPU_MODE -fpermissive -Wconversion -std=c++0x)# -march=native)
             #set(CMAKE_CXX_FLAGS "-DQPU_MODE -fpermissive -Wconversion -std=c++0x ")
-            PRIVATE -marm -march=armv6 -mfpu=vfp -mfloat-abi=hard)# -march=native -DQPU_MODE  -fpermissive)
+            PRIVATE -marm -march=armv6 -mfpu=vfp -mfloat-abi=hard -DQPU_MODE  -fpermissive)# -march=native)
         target_compile_definitions(ncnn
             PRIVATE __ANDROID__  )
     endif()
