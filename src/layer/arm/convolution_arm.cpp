@@ -25,6 +25,7 @@
 
 #endif // __ARM_NEON
 
+#include <QPULib.h>
 
 namespace ncnn {
 
