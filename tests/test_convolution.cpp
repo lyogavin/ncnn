@@ -271,7 +271,7 @@ int main()
 
     int w = 10;
     int h = 10;
-    int inch = 1280;
+    int inch = 128;
     int outch = 126;
 
 
