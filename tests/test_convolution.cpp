@@ -13,7 +13,8 @@
 // specific language governing permissions and limitations under the License.
 
 
-#include <QPULib.h>
+//#include <QPULib.h>
+#include <App/Sgemm.h>
 
 #include "testutil.h"
 

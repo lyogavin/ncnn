@@ -25,7 +25,8 @@
 
 #endif // __ARM_NEON
 
-#include <QPULib.h>
+//#include <QPULib.h>
+#include <App/Sgemm.h>
 
 namespace ncnn {
 
