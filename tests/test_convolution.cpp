@@ -14,7 +14,7 @@
 
 
 //#include <QPULib.h>
-#include <App/Sgemm.h>
+#include <QPULib_external.h>
 
 #include "testutil.h"
 
