@@ -22,7 +22,6 @@ static void conv1x1s1_sgemm_transform_kernel_neon(const Mat& _kernel, Mat& kerne
     const float* kernel = _kernel;
 
     _kernel.dump_info("kernel");
-    _kernel.dump_info("kernel_tm");
 
     // interleave
 #if __ARM_NEON && __aarch64__
@@ -31,6 +30,7 @@ static void conv1x1s1_sgemm_transform_kernel_neon(const Mat& _kernel, Mat& kerne
     kernel_tm.create(4*4, inch/4 + inch%4, outch/4 + outch%4);
 #endif // __ARM_NEON && __aarch64__
 
+    kernel_tm.dump_info("kernel_tm");
     int p = 0;
 #if __ARM_NEON && __aarch64__
     for (; p+7<outch; p+=8)
