@@ -286,9 +286,9 @@ int main()
 
     //init_qpulib_sgemm();
 
-    ncnn::weight_1x1_sgemm_data weight_1x1_sgemm_data;
+    ncnn::Mat weight_1x1_sgemm_data;
 
-    fprintf(stderr, "use conv1x1s1_sgemm_transform_kernel_neon num_input:%d num_output:%d\n", num_input, num_output);
+    //fprintf(stderr, "use conv1x1s1_sgemm_transform_kernel_neon num_input:%d num_output:%d\n", num_input, num_output);
     conv1x1s1_sgemm_transform_kernel_neon(kernel, weight_1x1_sgemm_data, inch, outch);
 
     conv1x1s1_sgemm_qpu(bot, top_qpu, kernel, bias, opt);
