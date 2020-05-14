@@ -16,6 +16,9 @@
 
 static void conv1x1s1_sgemm_transform_kernel_neon(const Mat& _kernel, Mat& kernel_tm, int inch, int outch)
 {
+    // init qpu lib:
+    ::init_qpulib_sgemm()
+
     const float* kernel = _kernel;
 
     _kernel.dump_info("kernel");
