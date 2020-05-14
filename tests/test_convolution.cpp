@@ -294,6 +294,16 @@ int main()
     conv1x1s1_sgemm_qpu(bot, top_qpu, kernel, bias, opt);
     conv1x1s1_sgemm_neon(bot, top, weight_1x1_sgemm_data, bias, opt);
 
+    float diff = 0.0f;
+
+    for (int i=0;i<w*h*outch;i++){
+        float *pa = top;
+        float *pb = top_qpu;
+        diff += *(pa + i) - *(pb+i);
+    }
+
+    printf("diff: %f", diff);
+
 
 
     return 0;
