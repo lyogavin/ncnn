@@ -282,6 +282,10 @@ int main()
     ncnn::Mat kernel = RandomMat(inch * outch, 1, 1);
     ncnn::Mat bias = RandomMat(outch, 1, 1);
 
+
+
+    init_qpulib_sgemm();
+
     conv1x1s1_sgemm_qpu(bot, top_qpu, kernel, bias, opt);
     conv1x1s1_sgemm_neon(bot, top, kernel, bias, opt);
 
