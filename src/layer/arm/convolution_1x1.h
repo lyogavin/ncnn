@@ -13,7 +13,10 @@
 // specific language governing permissions and limitations under the License.
 
 
+#ifndef G_USEGPU
+#define G_USEGPU
 bool g_useqpu = false;
+#endif
 
 
 static void conv1x1s1_sgemm_transform_kernel_neon(const Mat& _kernel, Mat& kernel_tm, int inch, int outch)
