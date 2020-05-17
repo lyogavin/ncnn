@@ -2,7 +2,7 @@
 macro(ncnn_add_example name)
     add_executable(${name} ${name}.cpp)
     target_compile_options(${name} PRIVATE -std=c++11)
-    target_link_libraries(${name} PRIVATE ncnn ${OpenCV_LIBS})
+    target_link_libraries(${name} PRIVATE ncnn ${OpenCV_LIBS} libQPULib.a)
 
     # add test to a virtual project group
     set_property(TARGET ${name} PROPERTY FOLDER "examples")
