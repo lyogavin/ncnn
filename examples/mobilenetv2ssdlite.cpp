@@ -174,11 +174,13 @@ int main(int argc, char** argv)
 #endif // NCNN_VULKAN
 
     g_useqpu = false;
+    fprintf(stderr, "testing g_useqpu\n");
 
     std::vector<Object> objects;
     detect_mobilenetv2(m, objects);
 
     g_useqpu = true;
+    fprintf(stderr, "testing no g_useqpu\n");
 
     std::vector<Object> objects1;
     detect_mobilenetv2(m, objects1);
