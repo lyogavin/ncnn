@@ -117,10 +117,22 @@ static void conv1x1s1_sgemm_transform_kernel_neon(const Mat& _kernel, Mat& kerne
     }
 }
 
+static void conv1x1s1_sgemm_qpu(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+{
+    const float *bot_data = bottom_blob;
+    float *top_data = top_blob;
+    const float *kernel_data = kernel;
+    const float *bias_data = _bias;
+
+    ::conv1x1s1_sgemm_qpu(bot_data, top_data, kernel_data, bias_data, 0, 0,
+                        bottom_blob.w, bottom_blob.h, bottom_blob.c, top_blob.c, sizeof(float));
+
+}
+
 static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
 {
     if (ncnn::g_useqpu) {
-        return ncnn::conv1x1s1_sgemm_qpu(bottom_blob, top_blob, kernel, _bias, opt);
+        return conv1x1s1_sgemm_qpu(bottom_blob, top_blob, kernel, _bias, opt);
     }
     int w = bottom_blob.w;
     int h = bottom_blob.h;
@@ -2068,18 +2080,6 @@ static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Ma
 //             outptr0[i] = sum;
 //         }
 //     }
-}
-
-static void conv1x1s1_sgemm_qpu(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
-{
-    const float *bot_data = bottom_blob;
-    float *top_data = top_blob;
-    const float *kernel_data = kernel;
-    const float *bias_data = _bias;
-
-    ::conv1x1s1_sgemm_qpu(bot_data, top_data, kernel_data, bias_data, 0, 0,
-                        bottom_blob.w, bottom_blob.h, bottom_blob.c, top_blob.c, sizeof(float));
-
 }
 
 
