@@ -837,7 +837,17 @@ int Convolution_arm::forward(const Mat& bottom_blob, Mat& top_blob, const Option
                     conv3x3s1_winograd64_neon5(bottom_blob_bordered, top_blob, weight_3x3_winograd64_data, bias_data, opt);
                     break;
                 case 2:
+                    static double conv1x1s1_sgemm_neon_total_time = 0.0;
+
+                    double start = get_current_time();
+
                     conv1x1s1_sgemm_neon(bottom_blob_bordered, top_blob, weight_1x1_sgemm_data, bias_data, opt);
+
+                    double end = get_current_time();
+
+                    conv1x1s1_sgemm_neon_total_time += end - start;
+                    fprintf(stderr, "use conv1x1s1_sgemm_neon time:%f, total %f\n", end - start, conv1x1s1_sgemm_neon_total_time);
+
                     break;
                 case 3:
                     conv_im2col_sgemm_neon(bottom_blob_bordered, top_blob, weight_sgemm_data, bias_data, kernel_w, kernel_h, stride_w, stride_h, opt);
@@ -863,12 +873,12 @@ int Convolution_arm::forward(const Mat& bottom_blob, Mat& top_blob, const Option
 
                 double start = get_current_time();
 
-                if (bottom_blob_bordered.c == 16 && top_blob.c == 96){
-                    conv1x1s1_sgemm_qpu(bottom_blob_bordered, top_blob, weight_1x1_sgemm_data, bias_data, opt);
+                //if (bottom_blob_bordered.c == 16 && top_blob.c == 96){
+                //    conv1x1s1_sgemm_qpu(bottom_blob_bordered, top_blob, weight_1x1_sgemm_data, bias_data, opt);
 
-                } else {
-                    conv1x1s1_sgemm_neon(bottom_blob_bordered, top_blob, weight_1x1_sgemm_data, bias_data, opt);
-                }
+                //} else {
+                conv1x1s1_sgemm_neon(bottom_blob_bordered, top_blob, weight_1x1_sgemm_data, bias_data, opt);
+                //}
 
                 double end = get_current_time();
 
