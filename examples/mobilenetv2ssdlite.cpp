@@ -150,7 +150,7 @@ static void draw_objects(const cv::Mat& bgr, const std::vector<Object>& objects)
     //cv::waitKey(0);
 }
 
-extern bool g_useqpu;
+extern bool ncnn::g_useqpu;
 
 int main(int argc, char** argv)
 {
@@ -173,13 +173,13 @@ int main(int argc, char** argv)
     ncnn::create_gpu_instance();
 #endif // NCNN_VULKAN
 
-    g_useqpu = false;
+    ncnn::g_useqpu = false;
     fprintf(stderr, "testing g_useqpu\n");
 
     std::vector<Object> objects;
     detect_mobilenetv2(m, objects);
 
-    g_useqpu = true;
+    ncnn::g_useqpu = true;
     fprintf(stderr, "testing no g_useqpu\n");
 
     std::vector<Object> objects1;
