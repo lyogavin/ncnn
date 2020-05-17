@@ -24,6 +24,7 @@
 
 
 namespace ncnn {
+#define G_USEGPU
 #include "layer/arm/convolution_1x1.h"
 }
 
