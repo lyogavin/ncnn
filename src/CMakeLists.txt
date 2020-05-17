@@ -292,6 +292,8 @@ else()
             PRIVATE -marm -march=armv6 -mfpu=vfp -mfloat-abi=hard -DQPU_MODE  -fpermissive)# -march=native)
         target_compile_definitions(ncnn
             PRIVATE __ANDROID__  )
+
+        target_link_libraries(libQPULib.a)
     endif()
     # target_compile_options(ncnn PRIVATE -march=native)
     # set_target_properties(ncnn PROPERTIES INTERPROCEDURAL_OPTIMIZATION ON)
