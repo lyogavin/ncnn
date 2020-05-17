@@ -441,7 +441,10 @@ int Convolution_arm::destroy_pipeline(const Option& opt)
 
 int Convolution_arm::forward(const Mat& bottom_blob, Mat& top_blob, const Option& opt) const
 {
+#ifdef DEBUG_INFO
+
     fprintf(stderr, "name:%s type:%s kernel_w:%d dilation_w:%d impl_type:%dd stride_w:%d\n", name.c_str(), type.c_str(), kernel_w, dilation_w, impl_type, stride_w);
+#endif
     if (bottom_blob.dims != 3)
     {
         fprintf(stderr, "bottom_blob.dims: %d not 3\n", bottom_blob.dims);
@@ -505,9 +508,10 @@ int Convolution_arm::forward(const Mat& bottom_blob, Mat& top_blob, const Option
     int outh = (h - kernel_extent_h) / stride_h + 1;
     int out_elempack = (opt.use_packing_layout && num_output % 4 == 0) ? 4 : 1;
     size_t out_elemsize = elemsize / elempack * out_elempack;
+#ifdef DEBUG_INFO
 
     fprintf(stderr, "name:%s type:%s kernel_w:%d dilation_w:%d impl_type:%dd stride_w:%d elempack: %d, out_elempack:%d\n", name.c_str(), type.c_str(), kernel_w, dilation_w, impl_type, stride_w, elempack, out_elempack);
-
+#endif
 
     top_blob.create(outw, outh, num_output / out_elempack, out_elemsize, out_elempack, opt.blob_allocator);
     if (top_blob.empty())
@@ -845,8 +849,10 @@ int Convolution_arm::forward(const Mat& bottom_blob, Mat& top_blob, const Option
                     double end = get_current_time();
 
                     conv1x1s1_sgemm_neon_total_time += end - start;
-                    fprintf(stderr, "use conv1x1s1_sgemm_neon time:%f, total %f\n", end - start, conv1x1s1_sgemm_neon_total_time);
+#ifdef DEBUG_INFO
 
+                    fprintf(stderr, "use conv1x1s1_sgemm_neon time:%f, total %f\n", end - start, conv1x1s1_sgemm_neon_total_time);
+#endif
                     break;
                 case 3:
                     conv_im2col_sgemm_neon(bottom_blob_bordered, top_blob, weight_sgemm_data, bias_data, kernel_w, kernel_h, stride_w, stride_h, opt);
@@ -882,12 +888,14 @@ int Convolution_arm::forward(const Mat& bottom_blob, Mat& top_blob, const Option
                 double end = get_current_time();
 
                 conv1x1s1_sgemm_neon_total_time += end - start;
+#ifdef DEBUG_INFO
+
                 fprintf(stderr, "use conv1x1s1_sgemm_neon time:%f, total %f\n", end - start, conv1x1s1_sgemm_neon_total_time);
 
                 bottom_blob_bordered.dump_info("bottom_blob_bordered");
                 top_blob.dump_info("top_blob");
                 weight_1x1_sgemm_data.dump_info("weight_1x1_sgemm_data");
-
+#endif
 
             }
             else
