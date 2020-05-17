@@ -13,6 +13,8 @@
 // specific language governing permissions and limitations under the License.
 
 
+bool g_useqpu = false;
+
 
 static void conv1x1s1_sgemm_transform_kernel_neon(const Mat& _kernel, Mat& kernel_tm, int inch, int outch)
 {
@@ -131,7 +133,7 @@ static void conv1x1s1_sgemm_qpu(const Mat& bottom_blob, Mat& top_blob, const Mat
 
 static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
 {
-    if (ncnn::g_useqpu) {
+    if (g_useqpu) {
         return conv1x1s1_sgemm_qpu(bottom_blob, top_blob, kernel, _bias, opt);
     }
     int w = bottom_blob.w;
