@@ -150,7 +150,7 @@ static void draw_objects(const cv::Mat& bgr, const std::vector<Object>& objects)
     //cv::waitKey(0);
 }
 
-bool g_useqpu;
+extern bool g_useqpu;
 
 int main(int argc, char** argv)
 {
