@@ -149,8 +149,9 @@ static void draw_objects(const cv::Mat& bgr, const std::vector<Object>& objects)
     cv::imwrite("./output.jpg", image);
     //cv::waitKey(0);
 }
-
-extern bool ncnn::g_useqpu;
+namespace ncnn {
+extern bool g_useqpu;
+}
 
 int main(int argc, char** argv)
 {
