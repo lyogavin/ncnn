@@ -29,6 +29,7 @@
 #include <QPULib_external.h>
 
 namespace ncnn {
+bool g_useqpu = false;
 
 #include "convolution_1x1.h"
 #include "convolution_2x2.h"

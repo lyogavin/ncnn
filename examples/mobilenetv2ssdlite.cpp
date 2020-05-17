@@ -26,6 +26,8 @@
 #include "gpu.h"
 #endif // NCNN_VULKAN
 
+
+
 class Noop : public ncnn::Layer {};
 DEFINE_LAYER_CREATOR(Noop)
 
@@ -169,8 +171,16 @@ int main(int argc, char** argv)
     ncnn::create_gpu_instance();
 #endif // NCNN_VULKAN
 
+    ncnn::g_useqpu = false;
+
     std::vector<Object> objects;
     detect_mobilenetv2(m, objects);
+
+    ncnn::g_useqpu = true;
+
+    std::vector<Object> objects1;
+    detect_mobilenetv2(m, objects1);
+
 
 #if NCNN_VULKAN
     ncnn::destroy_gpu_instance();
