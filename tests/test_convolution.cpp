@@ -296,10 +296,16 @@ int main()
 
     float diff = 0.0f;
 
+    int j = 0;
+
     for (int i=0;i<w*h*outch;i++){
         float *pa = top;
         float *pb = top_qpu;
         diff += *(pa + i) - *(pb+i);
+
+        if (j++ < 100){
+            printf("%f - %f", *(pa + i) , *(pb+i));
+        }
     }
 
     printf("diff: %f", diff);
