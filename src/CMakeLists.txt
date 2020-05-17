@@ -293,7 +293,6 @@ else()
         target_compile_definitions(ncnn
             PRIVATE __ANDROID__  )
 
-        target_link_libraries(ncnn libQPULib.a)
     endif()
     # target_compile_options(ncnn PRIVATE -march=native)
     # set_target_properties(ncnn PROPERTIES INTERPROCEDURAL_OPTIMIZATION ON)
