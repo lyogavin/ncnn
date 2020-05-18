@@ -24,6 +24,7 @@
 
 
 namespace ncnn {
+extern bool g_useqpu;
 #include "layer/arm/convolution_1x1.h"
 }
 
