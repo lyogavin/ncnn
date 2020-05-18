@@ -345,7 +345,7 @@ int Convolution_arm::create_pipeline(const Option& opt)
     if (elempack == 1 && out_elempack == 1)
     {
         use_winograd3x3 = false;
-        use_sgemm1x1 = false;
+        use_sgemm1x1 = true;
 
         if (opt.use_winograd_convolution && kernel_w == 3 && kernel_h == 3 && dilation_w == 1 && dilation_h == 1 && stride_w == 1 && stride_h == 1)
         {
