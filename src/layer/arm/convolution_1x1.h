@@ -128,7 +128,40 @@ static void conv1x1s1_sgemm_qpu(const Mat& bottom_blob, Mat& top_blob, const Mat
 
 }
 
-static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+static void conv1x1s1_sgemm_neon_original(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
+{
+    if (!g_useqpu) {
+        return conv1x1s1_sgemm_neon_original(bottom_blob, top_blob, kernel, _bias, opt);
+    }
+
+    Mat tmp;
+
+    tmp.create_like(top_blob);
+
+    conv1x1s1_sgemm_qpu(bottom_blob, top_blob, kernel, _bias, opt);
+
+    conv1x1s1_sgemm_neon_original(bottom_blob, tmp, kernel, _bias, opt);
+
+
+    float diff = 0.0f;
+
+    int j = 0;
+
+    for (int i=0;i<tmp.w*tmp.h*tmp.c;i++){
+        float *pa = top_blob;
+        float *pb = tmp;
+        diff += *(pa + i) - *(pb+i);
+
+        if (j++ < 20){
+            printf("%f - %f\n", *(pa + i) , *(pb+i));
+        }
+    }
+
+    printf("w: %d, h: %d, c: %d - diff: %f\n", tmp.w, tmp.h, tmp.c, diff);
+
+
+}
+static void conv1x1s1_sgemm_neon_original(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
 {
     if (g_useqpu) {
         return conv1x1s1_sgemm_qpu(bottom_blob, top_blob, kernel, _bias, opt);
