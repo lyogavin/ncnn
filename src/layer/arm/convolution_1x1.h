@@ -127,6 +127,7 @@ static void conv1x1s1_sgemm_qpu(const Mat& bottom_blob, Mat& top_blob, const Mat
                         bottom_blob.w, bottom_blob.h, bottom_blob.c, top_blob.c, sizeof(float));
 
 }
+static void conv1x1s1_sgemm_neon_original(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt);
 
 static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
 {
