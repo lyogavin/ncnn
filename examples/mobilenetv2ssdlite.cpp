@@ -174,17 +174,18 @@ int main(int argc, char** argv)
     ncnn::create_gpu_instance();
 #endif // NCNN_VULKAN
 
-    ncnn::g_useqpu = false;
+    ncnn::g_useqpu = true;
     fprintf(stderr, "testing g_useqpu\n");
 
     std::vector<Object> objects;
     detect_mobilenetv2(m, objects);
 
-    ncnn::g_useqpu = true;
+    /*
+    ncnn::g_useqpu = false;
     fprintf(stderr, "testing no g_useqpu\n");
 
     std::vector<Object> objects1;
-    detect_mobilenetv2(m, objects1);
+    detect_mobilenetv2(m, objects1);*/
 
 
 #if NCNN_VULKAN
