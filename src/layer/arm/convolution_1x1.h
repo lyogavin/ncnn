@@ -16,6 +16,8 @@
 #ifndef G_USEGPU
 #define G_USEGPU
 bool g_useqpu = false;
+#else
+extern bool g_useqpu = false;
 #endif
 
 
