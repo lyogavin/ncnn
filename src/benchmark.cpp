@@ -73,7 +73,7 @@ void benchmark(const Layer* layer, const Mat& bottom_blob, Mat& top_blob, double
                 ((Convolution*)layer)->stride_h,
                 ((Convolution*)layer)->dilation_w,
                 ((Convolution*)layer)->dilation_h,
-                ((Convolution*)layer)->impl_type,
+                ((Convolution*)layer)->impl_type
         );
     }
     else if (layer->type == "ConvolutionDepthWise")
