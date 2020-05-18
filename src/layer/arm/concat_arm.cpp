@@ -18,6 +18,7 @@
 
 namespace ncnn {
 
+
 DEFINE_LAYER_CREATOR(Concat_arm)
 
 Concat_arm::Concat_arm()

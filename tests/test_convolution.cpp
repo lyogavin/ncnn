@@ -14,7 +14,6 @@
 
 
 //#include <QPULib.h>
-#define G_USEGPU
 #include <QPULib_external.h>
 
 #include "testutil.h"
