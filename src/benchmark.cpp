@@ -66,7 +66,7 @@ void benchmark(const Layer* layer, const Mat& bottom_blob, Mat& top_blob, double
     fprintf(stderr, "    |    feature_map: %4d x %-4d    inch: %4d    outch: %4d", bottom_blob.w, bottom_blob.h, bottom_blob.c, top_blob.c);
     if (layer->type == "Convolution")
     {
-        fprintf(stderr, "     kernel: %1d x %1d     stride: %1d x %1d   dialation: %1d x %1d    imply type: %d",
+        fprintf(stderr, "     kernel: %1d x %1d     stride: %1d x %1d   dialation: %1d x %1d    imply type: %1d",
                 ((Convolution*)layer)->kernel_w,
                 ((Convolution*)layer)->kernel_h,
                 ((Convolution*)layer)->stride_w,

@@ -1000,6 +1000,10 @@ int Convolution_arm::forward(const Mat& bottom_blob, Mat& top_blob, const Option
         }
         else
         {
+        #ifdef DEBUG_INFO
+
+            fprintf(stderr, "use manual calculation");
+        #endif
             // num_output
             #pragma omp parallel for num_threads(opt.num_threads)
             for (int p=0; p<num_output; p++)
