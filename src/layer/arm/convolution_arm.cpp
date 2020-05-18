@@ -904,6 +904,10 @@ int Convolution_arm::forward(const Mat& bottom_blob, Mat& top_blob, const Option
             }
             else
             {
+#ifdef DEBUG_INFO
+
+                fprintf(stderr, "use conv1x1s1_neon");
+#endif
                 conv1x1s1_neon(bottom_blob_bordered, top_blob, weight_data, bias_data, opt);
             }
 
