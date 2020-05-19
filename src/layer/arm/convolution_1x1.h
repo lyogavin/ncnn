@@ -131,7 +131,7 @@ static void conv1x1s1_sgemm_qpu(const Mat& bottom_blob, Mat& top_blob, const Mat
     const float *bias_data = _bias;
 
     ::conv1x1s1_sgemm_qpu(bot_data, top_data, kernel_data, bias_data, 0, 0,
-                        bottom_blob.w, bottom_blob.h, bottom_blob.c, top_blob.c, sizeof(float));
+                        bottom_blob.w, bottom_blob.h, bottom_blob.c, top_blob.c, bottom_blob.cstep, top_blob.cstep, sizeof(float));
 
 }
 static void conv1x1s1_sgemm_neon_original(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt);
