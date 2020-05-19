@@ -140,9 +140,10 @@ static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Ma
 {
     if (!g_useqpu) {
         return conv1x1s1_sgemm_neon_original(bottom_blob, top_blob, kernel, _bias, opt);
-    } else {
-        return conv1x1s1_sgemm_qpu(bottom_blob, top_blob, kernel, _bias, opt);
     }
+    /*else {
+        return conv1x1s1_sgemm_qpu(bottom_blob, top_blob, kernel, _bias, opt);
+    }*/
 
     Mat tmp;
 
@@ -151,7 +152,13 @@ static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Ma
     conv1x1s1_sgemm_qpu(bottom_blob, top_blob, kernel, _bias, opt);
     //conv1x1s1_sgemm_qpu(bottom_blob, tmp, kernel, _bias, opt);
 
-    conv1x1s1_sgemm_neon_original(bottom_blob, tmp, kernel, _bias, opt);
+
+    ncnn::Mat weight_1x1_sgemm_data;
+
+    //fprintf(stderr, "use conv1x1s1_sgemm_transform_kernel_neon num_input:%d num_output:%d\n", num_input, num_output);
+    conv1x1s1_sgemm_transform_kernel_neon(kernel, weight_1x1_sgemm_data, bottom_blob.c, top_blob.c);
+
+    conv1x1s1_sgemm_neon_original(bottom_blob, tmp, weight_1x1_sgemm_data, _bias, opt);
     //conv1x1s1_sgemm_neon_original(bottom_blob, top_blob, kernel, _bias, opt);
 
 
