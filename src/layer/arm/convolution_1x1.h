@@ -19,6 +19,7 @@ static void conv1x1s1_sgemm_transform_kernel_neon(const Mat& _kernel, Mat& kerne
     ::init_qpulib_sgemm();
 
     if (g_useqpu) {
+        printf("gpu clone mem\n");
         kernel_tm.create_like(_kernel);
         memcpy(kernel_tm.data, _kernel.data, _kernel.total() * _kernel.elemsize);
         return;
