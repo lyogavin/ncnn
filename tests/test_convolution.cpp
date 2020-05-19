@@ -305,7 +305,7 @@ int main()
         diff += *(pa + i) - *(pb+i);
 
         if (j++ < 100){
-            printf("%f - %f", *(pa + i) , *(pb+i));
+            printf("%f - %f\n", *(pa + i) , *(pb+i));
         }
     }
 
