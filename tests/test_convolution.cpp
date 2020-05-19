@@ -271,10 +271,10 @@ int main()
     opt.use_int8_storage = false;
     opt.use_int8_arithmetic = false;
 
-    int w = 10;
-    int h = 10;
-    int inch = 128;
-    int outch = 126;
+    int w = 150;//10;
+    int h = 150;//10;
+    int inch = 32;//128;
+    int outch = 16;//126;
 
 
     ncnn::Mat bot = RandomMat(w, h, inch);
