@@ -304,12 +304,13 @@ int main()
         float *pb = top_qpu;
         diff += *(pa + i) - *(pb+i);
 
-        if (j++ < 100){
+        if (j < 100){
             printf("%f - %f\n", *(pa + i) , *(pb+i));
         }
+        j++;
     }
 
-    printf("diff: %f", diff);
+    printf("diff: %f", diff / j);
 
 
 
