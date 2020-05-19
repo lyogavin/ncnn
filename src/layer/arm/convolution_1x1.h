@@ -139,6 +139,8 @@ static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Ma
 {
     if (!g_useqpu) {
         return conv1x1s1_sgemm_neon_original(bottom_blob, top_blob, kernel, _bias, opt);
+    } else {
+        return conv1x1s1_sgemm_qpu(bottom_blob, top_blob, kernel, _bias, opt);
     }
 
     Mat tmp;
