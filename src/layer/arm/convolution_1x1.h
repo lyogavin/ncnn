@@ -146,6 +146,13 @@ static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Ma
     conv1x1s1_sgemm_neon_original(bottom_blob, top_blob, kernel, _bias, opt);
 
 
+    printf("diff testing\n");
+    bottom_blob.dump_info("bottom_blob");
+    kernel.dump_info("kernel");
+    _bias.dump_info("_bias");
+    bottom_blob.dump_info("bottom_blob");
+
+
     float diff = 0.0f;
 
     int j = 0;
@@ -155,12 +162,14 @@ static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Ma
         float *pb = tmp;
         diff += *(pa + i) - *(pb+i);
 
-        if (j++ < 20){
+
+        if (j < 20){
             printf("%f - %f\n", *(pa + i) , *(pb+i));
         }
+        j++;
     }
 
-    printf("w: %d, h: %d, c: %d - diff: %f\n", tmp.w, tmp.h, tmp.c, diff);
+    printf("w: %d, h: %d, c: %d - diff: %f\n", tmp.w, tmp.h, tmp.c, diff / j);
 
 
 }
