@@ -166,9 +166,6 @@ static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Ma
 }
 static void conv1x1s1_sgemm_neon_original(const Mat& bottom_blob, Mat& top_blob, const Mat& kernel, const Mat& _bias, const Option& opt)
 {
-    if (g_useqpu) {
-        return conv1x1s1_sgemm_qpu(bottom_blob, top_blob, kernel, _bias, opt);
-    }
     int w = bottom_blob.w;
     int h = bottom_blob.h;
     int inch = bottom_blob.c;
