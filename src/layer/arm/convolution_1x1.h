@@ -156,7 +156,9 @@ static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Ma
     ncnn::Mat weight_1x1_sgemm_data;
 
     //fprintf(stderr, "use conv1x1s1_sgemm_transform_kernel_neon num_input:%d num_output:%d\n", num_input, num_output);
+    g_useqpu = false;
     conv1x1s1_sgemm_transform_kernel_neon(kernel, weight_1x1_sgemm_data, bottom_blob.c, top_blob.c);
+    g_useqpu = true;
 
     conv1x1s1_sgemm_neon_original(bottom_blob, tmp, weight_1x1_sgemm_data, _bias, opt);
     //conv1x1s1_sgemm_neon_original(bottom_blob, top_blob, kernel, _bias, opt);
