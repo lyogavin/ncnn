@@ -139,9 +139,11 @@ static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Ma
 
     tmp.create_like(top_blob);
 
-    conv1x1s1_sgemm_qpu(bottom_blob, top_blob, kernel, _bias, opt);
+    //conv1x1s1_sgemm_qpu(bottom_blob, top_blob, kernel, _bias, opt);
+    conv1x1s1_sgemm_qpu(bottom_blob, tmp, kernel, _bias, opt);
 
-    conv1x1s1_sgemm_neon_original(bottom_blob, tmp, kernel, _bias, opt);
+    //conv1x1s1_sgemm_neon_original(bottom_blob, tmp, kernel, _bias, opt);
+    conv1x1s1_sgemm_neon_original(bottom_blob, top_blob, kernel, _bias, opt);
 
 
     float diff = 0.0f;
