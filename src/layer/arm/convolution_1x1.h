@@ -18,6 +18,12 @@ static void conv1x1s1_sgemm_transform_kernel_neon(const Mat& _kernel, Mat& kerne
     // init qpu lib:
     ::init_qpulib_sgemm();
 
+    if (g_useqpu) {
+        kernel_tm.create_like(_kernel);
+        memcpy(kernel_tm.data, _kernel.data, _kernel.total() * _kernel.elemsize);
+        return;
+    }
+
     const float* kernel = _kernel;
 
     _kernel.dump_info("kernel");
@@ -139,11 +145,11 @@ static void conv1x1s1_sgemm_neon(const Mat& bottom_blob, Mat& top_blob, const Ma
 
     tmp.create_like(top_blob);
 
-    //conv1x1s1_sgemm_qpu(bottom_blob, top_blob, kernel, _bias, opt);
-    conv1x1s1_sgemm_qpu(bottom_blob, tmp, kernel, _bias, opt);
+    conv1x1s1_sgemm_qpu(bottom_blob, top_blob, kernel, _bias, opt);
+    //conv1x1s1_sgemm_qpu(bottom_blob, tmp, kernel, _bias, opt);
 
-    //conv1x1s1_sgemm_neon_original(bottom_blob, tmp, kernel, _bias, opt);
-    conv1x1s1_sgemm_neon_original(bottom_blob, top_blob, kernel, _bias, opt);
+    conv1x1s1_sgemm_neon_original(bottom_blob, tmp, kernel, _bias, opt);
+    //conv1x1s1_sgemm_neon_original(bottom_blob, top_blob, kernel, _bias, opt);
 
 
     printf("diff testing\n");
