@@ -271,46 +271,49 @@ int main()
     opt.use_int8_storage = false;
     opt.use_int8_arithmetic = false;
 
-    int w = 150;//10;
-    int h = 150;//10;
-    int inch = 32;//128;
-    int outch = 16;//126;
+    for (int testid = 0; testid < 1; testid++) {
+
+        int w = 3;//150;//10;
+        int h = 3;//150;//10;
+        int inch = 32;//128;
+        int outch = 16;//126;
 
 
-    ncnn::Mat bot = RandomMat(w, h, inch);
-    ncnn::Mat top = RandomMat(w, h, outch);
-    ncnn::Mat top_qpu = RandomMat(w, h, outch);
-    ncnn::Mat kernel = RandomMat(inch * outch, 1, 1);
-    ncnn::Mat bias = RandomMat(outch, 1, 1);
+        ncnn::Mat bot = RandomMat(w, h, inch);
+        ncnn::Mat top = RandomMat(w, h, outch);
+        ncnn::Mat top_qpu = RandomMat(w, h, outch);
+        ncnn::Mat kernel = RandomMat(inch * outch, 1, 1);
+        ncnn::Mat bias = RandomMat(outch, 1, 1);
 
 
 
-    //init_qpulib_sgemm();
+        //init_qpulib_sgemm();
 
-    ncnn::Mat weight_1x1_sgemm_data;
+        ncnn::Mat weight_1x1_sgemm_data;
 
-    //fprintf(stderr, "use conv1x1s1_sgemm_transform_kernel_neon num_input:%d num_output:%d\n", num_input, num_output);
-    conv1x1s1_sgemm_transform_kernel_neon(kernel, weight_1x1_sgemm_data, inch, outch);
+        //fprintf(stderr, "use conv1x1s1_sgemm_transform_kernel_neon num_input:%d num_output:%d\n", num_input, num_output);
+        conv1x1s1_sgemm_transform_kernel_neon(kernel, weight_1x1_sgemm_data, inch, outch);
 
-    conv1x1s1_sgemm_qpu(bot, top_qpu, kernel, bias, opt);
-    conv1x1s1_sgemm_neon(bot, top, weight_1x1_sgemm_data, bias, opt);
+        conv1x1s1_sgemm_qpu(bot, top_qpu, kernel, bias, opt);
+        conv1x1s1_sgemm_neon(bot, top, weight_1x1_sgemm_data, bias, opt);
 
-    float diff = 0.0f;
+        float diff = 0.0f;
 
-    int j = 0;
+        int j = 0;
 
-    for (int i=0;i<w*h*outch;i++){
-        float *pa = top;
-        float *pb = top_qpu;
-        diff += *(pa + i) - *(pb+i);
+        for (int i=0;i<w*h*outch;i++){
+            float *pa = top;
+            float *pb = top_qpu;
+            diff += *(pa + i) - *(pb+i);
 
-        if (j < 100){
-            printf("%f - %f\n", *(pa + i) , *(pb+i));
+            if (j < 100){
+                printf("%f - %f\n", *(pa + i) , *(pb+i));
+            }
+            j++;
         }
-        j++;
-    }
 
-    printf("diff: %f", diff / j);
+        printf("diff: %f", diff / j);
+    }
 
 
 
