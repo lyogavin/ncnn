@@ -33,7 +33,7 @@
 
 namespace ncnn {
 
-#define DEBUG_INFO
+//#define DEBUG_INFO
 
 void Mat::dump_info(const char * name) const
 {
