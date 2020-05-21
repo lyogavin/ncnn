@@ -174,7 +174,7 @@ int main(int argc, char** argv)
     ncnn::create_gpu_instance();
 #endif // NCNN_VULKAN
 
-    ncnn::g_useqpu = true;
+    ncnn::g_useqpu = false;
     fprintf(stderr, "testing g_useqpu\n");
 
     std::vector<Object> objects;
