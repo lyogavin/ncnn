@@ -297,6 +297,9 @@ int main()
         conv1x1s1_sgemm_qpu(bot, top_qpu, kernel, bias, opt);
         conv1x1s1_sgemm_neon(bot, top, weight_1x1_sgemm_data, bias, opt);
 
+
+        printf("in cstep: %d, out cstep: %d\n", bot.cstep, top.cstep);
+
         float diff = 0.0f;
 
         int j = 0;
