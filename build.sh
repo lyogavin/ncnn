@@ -178,3 +178,9 @@ cmake   -DNCNN_OPENMP=OFF \
 make -j 8
 make install
 popd
+
+
+
+
+#### Pi3 release no benchmark print:
+cmake -DCMAKE_BUILD_TYPE=release -DNCNN_BENCHMARK=OFF -DCMAKE_TOOLCHAIN_FILE=../toolchains/pi3.toolchain.cmake  -DPI3=ON ..
