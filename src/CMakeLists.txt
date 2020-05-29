@@ -232,7 +232,11 @@ configure_file(layer_type_enum.h.in ${CMAKE_CURRENT_BINARY_DIR}/layer_type_enum.
 configure_file(layer_shader_registry.h.in ${CMAKE_CURRENT_BINARY_DIR}/layer_shader_registry.h)
 configure_file(layer_shader_spv_data.h.in ${CMAKE_CURRENT_BINARY_DIR}/layer_shader_spv_data.h)
 
-add_library(ncnn STATIC ${ncnn_SRCS})
+#add_library(ncnn STATIC ${ncnn_SRCS})
+
+add_library(ncnn OBJECT ${ncnn_SRCS})
+
+add_library(ncnn STATIC $<TARGET_OBJECTS:ncnn>)
 add_library(ncnnshared SHARED $<TARGET_OBJECTS:ncnn>)
 
 target_include_directories(ncnn
