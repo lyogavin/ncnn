@@ -236,7 +236,7 @@ configure_file(layer_shader_spv_data.h.in ${CMAKE_CURRENT_BINARY_DIR}/layer_shad
 
 add_library(ncnn OBJECT ${ncnn_SRCS})
 
-add_library(ncnn STATIC $<TARGET_OBJECTS:ncnn>)
+add_library(ncnnstatic STATIC $<TARGET_OBJECTS:ncnn>)
 add_library(ncnnshared SHARED $<TARGET_OBJECTS:ncnn>)
 
 target_include_directories(ncnn
